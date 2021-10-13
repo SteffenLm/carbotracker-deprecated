@@ -20,6 +20,8 @@ import { environment } from '../environments/environment';
         runtimeChecks: {
           strictActionImmutability: true,
           strictStateImmutability: true,
+          strictActionWithinNgZone: true,
+          strictActionTypeUniqueness: true,
         },
       }
     ),
