@@ -33,6 +33,9 @@
     "carbotracker-e2e": {
       "tags": [],
       "implicitDependencies": ["carbotracker"]
+    },
+    "products": {
+      "tags": []
     }
   }
 }
