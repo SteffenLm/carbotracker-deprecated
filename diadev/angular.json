@@ -121,6 +121,31 @@
         }
       }
     },
+    "localstorage": {
+      "projectType": "library",
+      "root": "libs/localstorage",
+      "sourceRoot": "libs/localstorage/src",
+      "prefix": "diadev",
+      "architect": {
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "outputs": ["coverage/libs/localstorage"],
+          "options": {
+            "jestConfig": "libs/localstorage/jest.config.js",
+            "passWithNoTests": true
+          }
+        },
+        "lint": {
+          "builder": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": [
+              "libs/localstorage/src/**/*.ts",
+              "libs/localstorage/src/**/*.html"
+            ]
+          }
+        }
+      }
+    },
     "products": {
       "projectType": "library",
       "root": "libs/products",

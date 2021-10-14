@@ -15,6 +15,7 @@
     "skipDefaultLibCheck": true,
     "baseUrl": ".",
     "paths": {
+      "@diadev/localstorage": ["libs/localstorage/src/index.ts"],
       "@diadev/products": ["libs/products/src/index.ts"]
     }
   },
