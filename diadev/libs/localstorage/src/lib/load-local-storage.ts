@@ -1,16 +1,16 @@
-const loadFromLocalStorage = <T>(key: string, fallBackValue: T) => {
+const loadFromLocalStorage = <T>(key: string) => {
   const savedItem = localStorage.getItem(key);
   if (savedItem !== null) {
     return JSON.parse(savedItem) as T;
   } else {
-    return fallBackValue;
+    throw new Error(`No value for key ${key} exists!`);
   }
 };
 
-export const createLocalStorageLoader: <T>(key: string) => (value: T) => T = (
-  key: string
+export const createLocalStorageLoader: <T>(key: string) => () => T = (
+  key: string,
 ) => {
-  return <T>(fallBackValue: T) => {
-    return loadFromLocalStorage(key, fallBackValue);
+  return <T>() => {
+    return loadFromLocalStorage<T>(key);
   };
 };

@@ -1,7 +1,7 @@
-import { createLocalStorageLoader } from '@diadev/localstorage';
+import { createLocalStorageLoader } from './load-local-storage';
 
-let getItemSpy = jest.fn();
-let setItemSpy = jest.fn();
+const getItemSpy = jest.fn();
+const setItemSpy = jest.fn();
 
 describe('local-storage-manager', () => {
   beforeAll(() => {
@@ -19,15 +19,13 @@ describe('local-storage-manager', () => {
       const loader = createLocalStorageLoader<string>('localStorageKey');
       expect(typeof loader).toBe('function');
     });
-    it('should return a given fallback value, if item does not exist in local storage', () => {
-      const givenFallBackValue = 'foo';
+    it('should throw error, if item does not exist in local storage', () => {
       getItemSpy.mockReturnValue(null);
 
       const getParsedDataFromLocalStorage =
         createLocalStorageLoader<string>('localStorageKey');
 
-      const parsedData = getParsedDataFromLocalStorage(givenFallBackValue);
-      expect(parsedData).toBe(givenFallBackValue);
+      expect(getParsedDataFromLocalStorage).toThrowError();
     });
     it('should return a the parsed value from local storage', () => {
       const givenSavedObject = {
@@ -38,7 +36,7 @@ describe('local-storage-manager', () => {
       const getParsedDataFromLocalStorage =
         createLocalStorageLoader('localStorageKey');
 
-      const parsedData = getParsedDataFromLocalStorage('');
+      const parsedData = getParsedDataFromLocalStorage();
       expect(parsedData).toEqual({ dummy: 1 });
     });
   });
