@@ -5,6 +5,14 @@ import { ProductsEntity } from './products.models';
 
 export const init = createAction('[Products Page] Init');
 
+export const openCreateProductDialog = createAction(
+  '[Products List Page] Open Create Product Dialog',
+);
+export const setSelectedProduct = createAction(
+  '[Products List Page] Set Selected Product',
+  props<{ productId: string }>(),
+);
+
 export const rehydrateProductsState = createAction(
   '[Products Persistence] Rehydrate Products State',
 );
@@ -38,10 +46,19 @@ export const addProduct = createAction(
 
 export const updateProduct = createAction(
   '[Products/API] Update Product',
-  props<{ product: Update<ProductsEntity> }>(),
+  props<{ updatedProduct: Update<ProductsEntity> }>(),
+);
+
+export const updateSelectedProduct = createAction(
+  '[Products/API] Update Selected Product',
+  props<{ updatedProduct: Partial<ProductsEntity> }>(),
 );
 
 export const deleteProduct = createAction(
   '[Products/API] Delete Product',
-  props<{ id: string }>(),
+  props<{ productId: string }>(),
+);
+
+export const deleteSelectedProduct = createAction(
+  '[Products/API] Delete Selected Product',
 );

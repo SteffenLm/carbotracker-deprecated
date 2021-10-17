@@ -27,6 +27,13 @@ export const initialState: ProductsState =
 const productsReducer = createReducer(
   initialState,
   on(
+    ProductsActions.setSelectedProduct,
+    (state, action): ProductsState => ({
+      ...state,
+      selectedId: action.productId,
+    }),
+  ),
+  on(
     ProductsActions.rehydrateProductsStateSuccess,
     (state, { productsState }): ProductsState => ({
       ...productsState,
@@ -41,14 +48,38 @@ const productsReducer = createReducer(
   ),
   on(
     ProductsActions.updateProduct,
-    (state, { product }): ProductsState =>
+    (state, { updatedProduct: product }): ProductsState =>
       productsEntityAdapter.updateOne(product, state),
   ),
+  on(ProductsActions.updateSelectedProduct, (state, action): ProductsState => {
+    if (state.selectedId) {
+      const { name, carbohydratesPer100Gram } = action.updatedProduct;
+      return productsEntityAdapter.updateOne(
+        {
+          id: state.selectedId,
+          changes: {
+            name,
+            carbohydratesPer100Gram,
+          },
+        },
+        state,
+      );
+    } else {
+      return state;
+    }
+  }),
   on(
     ProductsActions.deleteProduct,
-    (state, { id }): ProductsState =>
-      productsEntityAdapter.removeOne(id, state),
+    (state, { productId }): ProductsState =>
+      productsEntityAdapter.removeOne(productId, state),
   ),
+  on(ProductsActions.deleteSelectedProduct, (state): ProductsState => {
+    if (state.selectedId) {
+      return productsEntityAdapter.removeOne(state.selectedId as string, state);
+    } else {
+      return state;
+    }
+  }),
 );
 
 export function reducer(state: ProductsState | undefined, action: Action) {

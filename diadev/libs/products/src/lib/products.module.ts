@@ -1,20 +1,26 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { StoreModule } from '@ngrx/store';
-import { EffectsModule } from '@ngrx/effects';
-import * as fromProducts from './+state/products/products.reducer';
-import { ProductsEffects } from './+state/products/products.effects';
-import { ProductsFacade } from './+state/products/products.facade';
+import { ReactiveFormsModule } from '@angular/forms';
+
+import { UiModule } from '@diadev/ui';
+import { ProductsMaterialModule } from './products-material.module';
+import { ProductsStateModule } from './products-state.module';
+import { ProductsRoutingModule } from './products-routing.module';
+
+import { ProductsDialogService } from './services/products-dialog.service';
+import { ProductListComponent } from './components/product-list/product-list.component';
+import { EditProductComponentComponent } from './components/edit-product-component/edit-product-component.component';
 
 @NgModule({
   imports: [
     CommonModule,
-    StoreModule.forFeature(
-      fromProducts.PRODUCTS_FEATURE_KEY,
-      fromProducts.reducer
-    ),
-    EffectsModule.forFeature([ProductsEffects]),
+    ReactiveFormsModule,
+    ProductsMaterialModule,
+    ProductsRoutingModule,
+    ProductsStateModule,
+    UiModule,
   ],
-  providers: [ProductsFacade],
+  providers: [ProductsDialogService],
+  declarations: [ProductListComponent, EditProductComponentComponent],
 })
 export class ProductsModule {}

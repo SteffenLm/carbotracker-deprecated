@@ -1,40 +1,40 @@
-import { TestBed } from '@angular/core/testing';
-import { provideMockActions } from '@ngrx/effects/testing';
-import { Action } from '@ngrx/store';
-import { provideMockStore } from '@ngrx/store/testing';
-import { NxModule } from '@nrwl/angular';
-import { hot } from '@nrwl/angular/testing';
-import { Observable } from 'rxjs';
+// import { TestBed } from '@angular/core/testing';
+// import { provideMockActions } from '@ngrx/effects/testing';
+// import { Action } from '@ngrx/store';
+// import { provideMockStore } from '@ngrx/store/testing';
+// import { NxModule } from '@nrwl/angular';
+// import { hot } from '@nrwl/angular/testing';
+// import { Observable } from 'rxjs';
 
-import * as ProductsActions from './products.actions';
-import { ProductsEffects } from './products.effects';
+// import * as ProductsActions from './products.actions';
+// import { ProductsEffects } from './products.effects';
 
-describe('ProductsEffects', () => {
-  let actions: Observable<Action>;
-  let effects: ProductsEffects;
+// describe('ProductsEffects', () => {
+//   let actions: Observable<Action>;
+//   let effects: ProductsEffects;
 
-  beforeEach(() => {
-    TestBed.configureTestingModule({
-      imports: [NxModule.forRoot()],
-      providers: [
-        ProductsEffects,
-        provideMockActions(() => actions),
-        provideMockStore(),
-      ],
-    });
+//   beforeEach(() => {
+//     TestBed.configureTestingModule({
+//       imports: [NxModule.forRoot()],
+//       providers: [
+//         ProductsEffects,
+//         provideMockActions(() => actions),
+//         provideMockStore(),
+//       ],
+//     });
 
-    effects = TestBed.inject(ProductsEffects);
-  });
+//     effects = TestBed.inject(ProductsEffects);
+//   });
 
-  describe('init$', () => {
-    it('should work', () => {
-      actions = hot('-a-|', { a: ProductsActions.init() });
+//   describe('init$', () => {
+//     it('should work', () => {
+//       actions = hot('-a-|', { a: ProductsActions.init() });
 
-      const expected = hot('-a-|', {
-        a: ProductsActions.loadProductsSuccess({ products: [] }),
-      });
+//       const expected = hot('-a-|', {
+//         a: ProductsActions.loadProductsSuccess({ products: [] }),
+//       });
 
-      expect(effects.init$).toBeObservable(expected);
-    });
-  });
-});
+//       expect(effects.init$).toBeObservable(expected);
+//     });
+//   });
+// });
