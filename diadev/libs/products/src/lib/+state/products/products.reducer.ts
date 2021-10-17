@@ -1,45 +1,56 @@
-import { EntityState, EntityAdapter, createEntityAdapter } from '@ngrx/entity';
+import { EntityState } from '@ngrx/entity';
 import { createReducer, on, Action } from '@ngrx/store';
 
 import * as ProductsActions from './products.actions';
+import { productsEntityAdapter } from './products.entity-adapter';
 import { ProductsEntity } from './products.models';
 
 export const PRODUCTS_FEATURE_KEY = 'products';
 
-export interface State extends EntityState<ProductsEntity> {
-  selectedId?: string | number; // which Products record has been selected
-  loaded: boolean; // has the Products list been loaded
-  error?: string | null; // last known error (if any)
+export interface ProductsState extends EntityState<ProductsEntity> {
+  selectedId: string | null;
+  loaded: boolean;
+  error: string | null;
 }
 
 export interface ProductsPartialState {
-  readonly [PRODUCTS_FEATURE_KEY]: State;
+  readonly [PRODUCTS_FEATURE_KEY]: ProductsState;
 }
 
-export const productsAdapter: EntityAdapter<ProductsEntity> =
-  createEntityAdapter<ProductsEntity>();
-
-export const initialState: State = productsAdapter.getInitialState({
-  // set initial required properties
-  loaded: false,
-});
+export const initialState: ProductsState =
+  productsEntityAdapter.getInitialState({
+    loaded: false,
+    selectedId: null,
+    error: null,
+  });
 
 const productsReducer = createReducer(
   initialState,
-  on(ProductsActions.init, (state) => ({
-    ...state,
-    loaded: false,
-    error: null,
-  })),
-  on(ProductsActions.loadProductsSuccess, (state, { products }) =>
-    productsAdapter.setAll(products, { ...state, loaded: true })
+  on(
+    ProductsActions.rehydrateProductsStateSuccess,
+    (state, { productsState }): ProductsState => ({
+      ...productsState,
+      loaded: true,
+      error: null,
+    }),
   ),
-  on(ProductsActions.loadProductsFailure, (state, { error }) => ({
-    ...state,
-    error,
-  }))
+  on(
+    ProductsActions.addProduct,
+    (state, { product }): ProductsState =>
+      productsEntityAdapter.addOne(product, state),
+  ),
+  on(
+    ProductsActions.updateProduct,
+    (state, { product }): ProductsState =>
+      productsEntityAdapter.updateOne(product, state),
+  ),
+  on(
+    ProductsActions.deleteProduct,
+    (state, { id }): ProductsState =>
+      productsEntityAdapter.removeOne(id, state),
+  ),
 );
 
-export function reducer(state: State | undefined, action: Action) {
+export function reducer(state: ProductsState | undefined, action: Action) {
   return productsReducer(state, action);
 }

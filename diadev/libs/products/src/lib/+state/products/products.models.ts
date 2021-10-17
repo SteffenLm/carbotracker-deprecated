@@ -1,7 +1,5 @@
-/**
- * Interface for the 'Products' data
- */
 export interface ProductsEntity {
-  id: string | number; // Primary ID
+  id: string;
   name: string;
+  carbohydratesPer100Gram: number;
 }

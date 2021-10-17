@@ -1,42 +1,40 @@
 import { createFeatureSelector, createSelector } from '@ngrx/store';
 import {
-  PRODUCTS_FEATURE_KEY,
-  State,
-  productsAdapter,
-} from './products.reducer';
+  selectProductEntities,
+  selectProducts,
+} from './products.entity-adapter';
+import { PRODUCTS_FEATURE_KEY, ProductsState } from './products.reducer';
 
-// Lookup the 'Products' feature state managed by NgRx
-export const getProductsState =
-  createFeatureSelector<State>(PRODUCTS_FEATURE_KEY);
+export const selectProductsState =
+  createFeatureSelector<ProductsState>(PRODUCTS_FEATURE_KEY);
 
-const { selectAll, selectEntities } = productsAdapter.getSelectors();
-
-export const getProductsLoaded = createSelector(
-  getProductsState,
-  (state: State) => state.loaded
+export const selectProductsLoaded = createSelector(
+  selectProductsState,
+  (state: ProductsState) => state.loaded,
 );
 
-export const getProductsError = createSelector(
-  getProductsState,
-  (state: State) => state.error
+export const selectProductsError = createSelector(
+  selectProductsState,
+  (state: ProductsState) => state.error,
 );
 
-export const getAllProducts = createSelector(getProductsState, (state: State) =>
-  selectAll(state)
+export const selectAllProducts = createSelector(
+  selectProductsState,
+  (state: ProductsState) => selectProducts(state),
 );
 
-export const getProductsEntities = createSelector(
-  getProductsState,
-  (state: State) => selectEntities(state)
+export const selectProductsEntities = createSelector(
+  selectProductsState,
+  (state: ProductsState) => selectProductEntities(state),
 );
 
-export const getSelectedId = createSelector(
-  getProductsState,
-  (state: State) => state.selectedId
+export const selectSelectedId = createSelector(
+  selectProductsState,
+  (state: ProductsState) => state.selectedId,
 );
 
-export const getSelected = createSelector(
-  getProductsEntities,
-  getSelectedId,
-  (entities, selectedId) => (selectedId ? entities[selectedId] : undefined)
+export const selectSelected = createSelector(
+  selectProductsEntities,
+  selectSelectedId,
+  (entities, selectedId) => (selectedId ? entities[selectedId] : undefined),
 );
