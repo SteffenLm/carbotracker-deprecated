@@ -1,0 +1,12 @@
+<mat-toolbar>
+    <mat-icon
+        style="margin-right: 0.5rem; cursor: pointer;"
+        *ngIf="enableBackNavigation"
+        routerLink='../'
+    >
+        chevron_left
+    </mat-icon>
+    <span>{{ title }}</span>
+    <span style="flex: 1 1 auto;"></span>
+    <ng-content></ng-content>
+</mat-toolbar>

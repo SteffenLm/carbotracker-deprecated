@@ -16,7 +16,8 @@
     "baseUrl": ".",
     "paths": {
       "@diadev/localstorage": ["libs/localstorage/src/index.ts"],
-      "@diadev/products": ["libs/products/src/index.ts"]
+      "@diadev/products": ["libs/products/src/index.ts"],
+      "@diadev/ui": ["libs/ui/src/index.ts"]
     }
   },
   "exclude": ["node_modules", "tmp"]
