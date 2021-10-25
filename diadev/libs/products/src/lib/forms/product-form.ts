@@ -1,24 +1,18 @@
 import { FormGroup } from '@angular/forms';
 import { Observable } from 'rxjs';
 import { map, startWith } from 'rxjs/operators';
+import { ProductFormModel } from './product-form-model';
 
-export class ProductForm<T> {
-  constructor(
-    private readonly productFormGroup: FormGroup,
-    private readonly setValues$: Observable<T>,
-  ) {
-    this.setValues$.subscribe((newValue) => {
-      this.productFormGroup.reset(newValue);
-    });
-  }
+export class ProductForm {
+  constructor(private readonly productFormModel: ProductFormModel) {}
 
   public getAsFormGroup(): FormGroup {
-    return this.productFormGroup;
+    return this.productFormModel.getFormGroup();
   }
 
   public isValid(): Observable<boolean> {
-    return this.productFormGroup.statusChanges.pipe(
-      map(() => this.productFormGroup.valid),
+    return this.productFormModel.getStatusChanges().pipe(
+      map(() => this.productFormModel.getValid()),
       startWith(false),
     );
   }
