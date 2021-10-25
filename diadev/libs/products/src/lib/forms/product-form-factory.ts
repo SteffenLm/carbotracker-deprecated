@@ -1,15 +1,13 @@
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Injectable } from '@angular/core';
+import { FormBuilder } from '@angular/forms';
+import { ProductForm } from './product-form';
+import { ProductFormModel } from './product-form-model';
 
+@Injectable()
 export class ProductFormFactory {
   constructor(private readonly formBuilder: FormBuilder) {}
 
-  createEditProductFormGroup(): FormGroup {
-    return this.formBuilder.group({
-      name: ['', [Validators.required]],
-      carbohydratesPer100Gram: [
-        '',
-        [Validators.required, Validators.min(1), Validators.max(100)],
-      ],
-    });
+  public createProductForm(): ProductForm {
+    return new ProductForm(new ProductFormModel(this.formBuilder));
   }
 }
