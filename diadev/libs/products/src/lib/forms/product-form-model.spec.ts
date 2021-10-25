@@ -1,12 +1,13 @@
 import { FormBuilder, FormGroup } from '@angular/forms';
 import {
   getEmptyFormValue,
-  getPastaFormValue,
+  getPastaProductFormValue,
   ProductFormValue,
 } from '../model/product-form-value.model';
 import { ProductFormModel } from './product-form-model';
 
-import { take } from 'rxjs/operators';
+import { take, toArray } from 'rxjs/operators';
+import { Observable } from 'rxjs';
 
 describe('ProductFormModel', () => {
   let mockedFormBuilder: FormBuilder;
@@ -48,21 +49,39 @@ describe('ProductFormModel', () => {
     const productFormModel = new ProductFormModel(new FormBuilder());
     const givenValues: ProductFormValue[] = [
       getEmptyFormValue(),
-      getPastaFormValue(),
+      getPastaProductFormValue(),
     ];
-    const resultItems: ProductFormValue[] = [];
+    let resultItems: ProductFormValue[] = [];
     productFormModel
       .getValueChanges()
-      .pipe(take(2))
-      .subscribe((formValue) => resultItems.push(formValue));
+      .pipe(take(2), toArray())
+      .subscribe((products) => (resultItems = products));
     givenValues.forEach((value) =>
       productFormModel.getFormGroup().setValue(value),
     );
 
     const expectedResult: ProductFormValue[] = [
       getEmptyFormValue(),
-      getPastaFormValue(),
+      getPastaProductFormValue(),
     ];
     expect(resultItems).toEqual(expectedResult);
+  });
+
+  it('should return the statusChanges property of the formgroup', () => {
+    const mockedValueChanges = {};
+    jest.spyOn(mockedFormBuilder, 'group').mockReturnValue({
+      statusChanges: mockedValueChanges as Observable<unknown>,
+    } as FormGroup);
+    const productFormModel = new ProductFormModel(mockedFormBuilder);
+    expect(productFormModel.getStatusChanges()).toBe(mockedValueChanges);
+  });
+
+  it('should return the valid property of the formgroup', () => {
+    const mockedValueProperty = {};
+    jest.spyOn(mockedFormBuilder, 'group').mockReturnValue({
+      valid: mockedValueProperty as boolean,
+    } as FormGroup);
+    const productFormModel = new ProductFormModel(mockedFormBuilder);
+    expect(productFormModel.getValid()).toBe(mockedValueProperty);
   });
 });

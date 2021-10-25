@@ -28,6 +28,14 @@ export class ProductFormModel {
     );
   }
 
+  public getStatusChanges(): Observable<void> {
+    return this.productFormGroup.statusChanges;
+  }
+
+  public getValid(): boolean {
+    return this.productFormGroup.valid;
+  }
+
   public getValue(): ProductFormValue {
     return {
       name: this.getNameControl().value,
