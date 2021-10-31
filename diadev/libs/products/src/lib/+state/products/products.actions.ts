@@ -5,14 +5,6 @@ import { ProductsEntity } from './products.models';
 
 export const init = createAction('[Products Page] Init');
 
-export const openCreateProductDialog = createAction(
-  '[Products List Page] Open Create Product Dialog',
-);
-export const selectProduct = createAction(
-  '[Products List Page] Set Selected Product',
-  props<{ productId: string }>(),
-);
-
 export const rehydrateProductsState = createAction(
   '[Products Persistence] Rehydrate Products State',
 );

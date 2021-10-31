@@ -27,13 +27,6 @@ export const initialState: ProductsState =
 const productsReducer = createReducer(
   initialState,
   on(
-    ProductsActions.selectProduct,
-    (state, action): ProductsState => ({
-      ...state,
-      selectedId: action.productId,
-    }),
-  ),
-  on(
     ProductsActions.rehydrateProductsStateSuccess,
     (state, { productsState }): ProductsState => ({
       ...productsState,

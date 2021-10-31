@@ -18,14 +18,6 @@ export class ProductsFacade {
     this.store.dispatch(ProductsActions.init());
   }
 
-  public setSelectedProduct(productId: string): void {
-    this.store.dispatch(ProductsActions.selectProduct({ productId }));
-  }
-
-  public openCreateProductDialog(): void {
-    this.store.dispatch(ProductsActions.openCreateProductDialog());
-  }
-
   public addProduct(product: Omit<ProductsEntity, 'id'>): void {
     const newProduct = {
       ...product,
