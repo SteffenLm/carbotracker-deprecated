@@ -1,5 +1,7 @@
 import { Component } from '@angular/core';
+import { ProductsEntity } from '@diadev/products';
 import { Observable } from 'rxjs';
+import { tap } from 'rxjs/operators';
 import { ProductsFacade } from '../../+state/products/products.facade';
 import { ProductForm } from '../../forms/product-form';
 import { ProductFormFactory } from '../../forms/product-form-factory';
@@ -20,6 +22,10 @@ import { ProductFormFactory } from '../../forms/product-form-factory';
 })
 export class EditProductComponent {
   public isProductFormValid: Observable<boolean> = this.productForm.isValid();
+  public selectedProduct: Observable<ProductsEntity> =
+    this.productsFacade.selectedProducts$.pipe(
+      tap((v) => this.productForm.getAsFormGroup().patchValue(v)),
+    );
 
   constructor(
     private readonly productsFacade: ProductsFacade,
@@ -30,7 +36,7 @@ export class EditProductComponent {
     this.productsFacade.updateSelectedProduct(this.productForm.getValue());
   }
 
-  public onDeleteProduct(): void {
-    this.productsFacade.deleteSelectedProduct();
+  public onDeleteProduct(id: string): void {
+    this.productsFacade.deleteProduct(id);
   }
 }

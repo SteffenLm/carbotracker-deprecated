@@ -1,9 +1,14 @@
-<diadev-toolbar [enableBackNavigation]="true" title="Edit product">
-  <button (click)="onDeleteProduct()" mat-icon-button>
+<diadev-toolbar [enableBackNavigation]="true" title="edit product">
+  <button
+    *ngIf="selectedProduct | async as selectedProduct"
+    (click)="onDeleteProduct(selectedProduct.id)"
+    mat-icon-button
+  >
     <mat-icon>delete</mat-icon>
   </button>
 </diadev-toolbar>
 <form
+  *ngIf="(selectedProduct | async) !== undefined; else notfound"
   (ngSubmit)="onSubmit()"
   [formGroup]="this.productForm.getAsFormGroup()"
   style="display: flex; flex-direction: column; padding: 1rem"
@@ -29,3 +34,11 @@
     ></diadev-fab-icon-button>
   </div>
 </form>
+<ng-template #notfound>
+  <div style="margin: 1rem">
+    <div>This product does not exist anymore.</div>
+    <button mat-raised-button color="primary" routerLink="../">
+      <mat-icon>chevron_left</mat-icon>GO BACK
+    </button>
+  </div>
+</ng-template>
