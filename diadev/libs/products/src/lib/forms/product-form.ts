@@ -1,6 +1,8 @@
 import { FormGroup } from '@angular/forms';
 import { Observable } from 'rxjs';
 import { map, startWith } from 'rxjs/operators';
+
+import { ProductFormValue } from '../model/product-form-value.model';
 import { ProductFormModel } from './product-form-model';
 
 export class ProductForm {
@@ -15,5 +17,9 @@ export class ProductForm {
       map(() => this.productFormModel.getValid()),
       startWith(false),
     );
+  }
+
+  public getValue(): ProductFormValue {
+    return this.productFormModel.getValue();
   }
 }

@@ -1,8 +1,9 @@
 import { Injectable } from '@angular/core';
-import { ProductsEntity } from './products.models';
 import { Update } from '@ngrx/entity';
 import { Store } from '@ngrx/store';
+
 import { ProductFormValue } from '../../model/product-form-value.model';
+import { ProductsEntity } from './products.models';
 
 import * as ProductsActions from './products.actions';
 import * as ProductsSelectors from './products.selectors';
@@ -18,11 +19,23 @@ export class ProductsFacade {
   }
 
   public setSelectedProduct(productId: string): void {
-    this.store.dispatch(ProductsActions.setSelectedProduct({ productId }));
+    this.store.dispatch(ProductsActions.selectProduct({ productId }));
   }
 
   public openCreateProductDialog(): void {
     this.store.dispatch(ProductsActions.openCreateProductDialog());
+  }
+
+  public addProduct(product: Omit<ProductsEntity, 'id'>): void {
+    const newProduct = {
+      ...product,
+      id: Date.now().toString(),
+    };
+    this.store.dispatch(
+      ProductsActions.addProduct({
+        product: newProduct,
+      }),
+    );
   }
 
   public updateProduct(updatedProduct: Update<ProductsEntity>): void {

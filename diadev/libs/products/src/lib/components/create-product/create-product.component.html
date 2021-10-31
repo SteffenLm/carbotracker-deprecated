@@ -1,0 +1,29 @@
+<diadev-toolbar title="Create product"></diadev-toolbar>
+<form
+  (ngSubmit)="onSubmit()"
+  [formGroup]="this.productForm.getAsFormGroup()"
+  style="display: flex; flex-direction: column; padding: 1rem"
+>
+  <mat-form-field>
+    <mat-label formGroupBane>Product name</mat-label>
+    <input type="text" formControlName="name" matInput />
+  </mat-form-field>
+  <mat-form-field>
+    <mat-label>Carbohydrates per 100g</mat-label>
+    <input type="number" formControlName="carbohydratesPer100Gram" matInput />
+  </mat-form-field>
+  <div
+    style="display: flex; flex-direction: row; justify-content: space-around"
+  >
+    <button mat-button mat-dialog-close type="button">Abort</button>
+    <button
+      [disabled]="(this.productFormIsValid | async) === false"
+      mat-raised-button
+      mat-dialog-close
+      type="submit"
+      color="primary"
+    >
+      Save
+    </button>
+  </div>
+</form>

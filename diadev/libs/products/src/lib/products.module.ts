@@ -10,6 +10,7 @@ import { ProductsRoutingModule } from './products-routing.module';
 import { ProductsDialogService } from './services/products-dialog.service';
 import { ProductListComponent } from './components/product-list/product-list.component';
 import { EditProductComponentComponent } from './components/edit-product-component/edit-product-component.component';
+import { CreateProductComponent } from './components/create-product/create-product.component';
 
 @NgModule({
   imports: [
@@ -21,6 +22,6 @@ import { EditProductComponentComponent } from './components/edit-product-compone
     UiModule,
   ],
   providers: [ProductsDialogService],
-  declarations: [ProductListComponent, EditProductComponentComponent],
+  declarations: [ProductListComponent, EditProductComponentComponent, CreateProductComponent],
 })
 export class ProductsModule {}

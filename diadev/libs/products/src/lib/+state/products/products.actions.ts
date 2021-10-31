@@ -8,7 +8,7 @@ export const init = createAction('[Products Page] Init');
 export const openCreateProductDialog = createAction(
   '[Products List Page] Open Create Product Dialog',
 );
-export const setSelectedProduct = createAction(
+export const selectProduct = createAction(
   '[Products List Page] Set Selected Product',
   props<{ productId: string }>(),
 );

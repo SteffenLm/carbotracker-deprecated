@@ -27,7 +27,7 @@ export const initialState: ProductsState =
 const productsReducer = createReducer(
   initialState,
   on(
-    ProductsActions.setSelectedProduct,
+    ProductsActions.selectProduct,
     (state, action): ProductsState => ({
       ...state,
       selectedId: action.productId,

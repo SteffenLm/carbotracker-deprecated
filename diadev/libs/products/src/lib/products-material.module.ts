@@ -31,6 +31,7 @@ import { MatListModule } from '@angular/material/list';
         maxWidth: '95vw',
         width: '90vw',
         panelClass: 'diadev-dialog-overlay',
+        hasBackdrop: true,
       }),
     },
   ],

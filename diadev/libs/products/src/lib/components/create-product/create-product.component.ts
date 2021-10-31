@@ -4,9 +4,9 @@ import { ProductForm } from '../../forms/product-form';
 import { ProductFormFactory } from '../../forms/product-form-factory';
 
 @Component({
-  selector: 'diadev-edit-product-component',
-  templateUrl: './edit-product-component.component.html',
-  styleUrls: ['./edit-product-component.component.scss'],
+  selector: 'diadev-create-product',
+  templateUrl: './create-product.component.html',
+  styleUrls: ['./create-product.component.scss'],
   providers: [
     ProductFormFactory,
     {
@@ -17,17 +17,20 @@ import { ProductFormFactory } from '../../forms/product-form-factory';
     },
   ],
 })
-export class EditProductComponentComponent {
+export class CreateProductComponent {
+  productFormIsValid = this.productForm.isValid();
+
   constructor(
     private readonly productsFacade: ProductsFacade,
     public readonly productForm: ProductForm,
   ) {}
 
   public onSubmit(): void {
-    this.productsFacade.updateSelectedProduct(this.productForm.getValue());
-  }
-
-  public onDeleteProduct(): void {
-    this.productsFacade.deleteSelectedProduct();
+    const productFormValue = this.productForm.getValue();
+    const newProduct = {
+      name: productFormValue.name,
+      carbohydratesPer100Gram: +productFormValue.carbohydratesPer100Gram,
+    };
+    this.productsFacade.addProduct(newProduct);
   }
 }

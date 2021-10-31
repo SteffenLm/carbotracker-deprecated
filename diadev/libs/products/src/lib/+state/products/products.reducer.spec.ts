@@ -1,3 +1,6 @@
+it('should s', () => {
+  expect(true).toBeTruthy();
+});
 // import { Action } from '@ngrx/store';
 
 // import * as ProductsActions from './products.actions';
