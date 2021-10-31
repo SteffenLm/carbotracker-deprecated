@@ -1,19 +1,17 @@
 import { Injectable } from '@angular/core';
 import { Store } from '@ngrx/store';
-import { createEffect, Actions, ofType, concatLatestFrom } from '@ngrx/effects';
+import { createEffect, Actions, ofType } from '@ngrx/effects';
 import { of } from 'rxjs';
-import { concatMap, map, switchMap, tap } from 'rxjs/operators';
+import { concatMap, map, switchMap } from 'rxjs/operators';
 
 import {
   createLocalStorageLoader,
   createLocalStorageSaver,
 } from '@diadev/localstorage';
-import { ProductsDialogService } from '../../services/products-dialog.service';
 
 import * as ProductsActions from './products.actions';
 import * as ProductsFeature from './products.reducer';
 import * as ProductsSelectors from './products.selectors';
-import { ProductsEntity } from './products.models';
 
 @Injectable()
 export class ProductsEffects {
@@ -62,6 +60,7 @@ export class ProductsEffects {
         ProductsActions.addProduct,
         ProductsActions.deleteProduct,
         ProductsActions.updateProduct,
+        ProductsActions.deleteSelectedProduct,
       ),
       concatMap(() => this.store.select(ProductsSelectors.selectProductsState)),
       map((productsState) =>
@@ -70,42 +69,9 @@ export class ProductsEffects {
     );
   });
 
-  createProduct = createEffect(
-    () => {
-      return this.actions$.pipe(
-        ofType(ProductsActions.openCreateProductDialog),
-        tap(() => {
-          this.productsDialogService.openCreateProductDialog();
-        }),
-      );
-    },
-    { dispatch: false },
-  );
-
-  editProduct = createEffect(
-    () => {
-      return this.actions$.pipe(
-        ofType(ProductsActions.selectProduct),
-        concatLatestFrom(() =>
-          this.store.select(ProductsSelectors.selectSelected),
-        ),
-        tap(([, selectedProduct]) => {
-          console.log(selectedProduct);
-          this.productsDialogService.openEditProductDialog(
-            selectedProduct as ProductsEntity,
-          );
-        }),
-      );
-    },
-    {
-      dispatch: false,
-    },
-  );
-
   constructor(
     private readonly actions$: Actions,
     private readonly store: Store,
-    private readonly productsDialogService: ProductsDialogService,
   ) {}
 
   private saveProductsState =

@@ -8,4 +8,5 @@ import { Component, Input } from '@angular/core';
 export class FabIconButtonComponent {
   @Input() public icon = 'add';
   @Input() public color = 'primary';
+  @Input() public disabled = false;
 }

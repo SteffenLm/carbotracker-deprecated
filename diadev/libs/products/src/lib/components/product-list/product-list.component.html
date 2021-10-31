@@ -2,14 +2,10 @@
 <mat-list>
   <mat-list-item
     *ngFor="let product of products$ | async"
-    (click)="onListItemClicked(product)"
+    [routerLink]="product.id"
   >
     {{ product.name }}, {{ product.carbohydratesPer100Gram }}g Carbohydrates
   </mat-list-item>
 </mat-list>
-<diadev-fab-icon-button
-  (click)="onAddButtonClicked()"
-  color="primary"
-  icon="add"
->
+<diadev-fab-icon-button routerLink="create" color="primary" icon="add">
 </diadev-fab-icon-button>

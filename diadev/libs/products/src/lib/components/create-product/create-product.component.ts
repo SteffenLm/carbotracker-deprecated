@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { Observable } from 'rxjs';
 import { ProductsFacade } from '../../+state/products/products.facade';
 import { ProductForm } from '../../forms/product-form';
 import { ProductFormFactory } from '../../forms/product-form-factory';
@@ -18,7 +19,7 @@ import { ProductFormFactory } from '../../forms/product-form-factory';
   ],
 })
 export class CreateProductComponent {
-  productFormIsValid = this.productForm.isValid();
+  public isProductFormValid: Observable<boolean> = this.productForm.isValid();
 
   constructor(
     private readonly productsFacade: ProductsFacade,

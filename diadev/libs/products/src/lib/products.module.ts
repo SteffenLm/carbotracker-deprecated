@@ -7,9 +7,8 @@ import { ProductsMaterialModule } from './products-material.module';
 import { ProductsStateModule } from './products-state.module';
 import { ProductsRoutingModule } from './products-routing.module';
 
-import { ProductsDialogService } from './services/products-dialog.service';
 import { ProductListComponent } from './components/product-list/product-list.component';
-import { EditProductComponentComponent } from './components/edit-product-component/edit-product-component.component';
+import { EditProductComponent } from './components/edit-product/edit-product.component';
 import { CreateProductComponent } from './components/create-product/create-product.component';
 
 @NgModule({
@@ -21,7 +20,10 @@ import { CreateProductComponent } from './components/create-product/create-produ
     ProductsStateModule,
     UiModule,
   ],
-  providers: [ProductsDialogService],
-  declarations: [ProductListComponent, EditProductComponentComponent, CreateProductComponent],
+  declarations: [
+    ProductListComponent,
+    EditProductComponent,
+    CreateProductComponent,
+  ],
 })
 export class ProductsModule {}

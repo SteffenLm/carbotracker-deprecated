@@ -1,4 +1,8 @@
-<diadev-toolbar title="Edit product"></diadev-toolbar>
+<diadev-toolbar [enableBackNavigation]="true" title="Edit product">
+  <button (click)="onDeleteProduct()" mat-icon-button>
+    <mat-icon>delete</mat-icon>
+  </button>
+</diadev-toolbar>
 <form
   (ngSubmit)="onSubmit()"
   [formGroup]="this.productForm.getAsFormGroup()"
@@ -15,22 +19,13 @@
   <div
     style="display: flex; flex-direction: row; justify-content: space-around"
   >
-    <button
-      mat-button
-      mat-dialog-close
-      (click)="onDeleteProduct()"
-      type="button"
-    >
-      Delete
-    </button>
-    <button
-      [disabled]="(this.productForm.isValid() | async) === false"
+    <diadev-fab-icon-button
+      [disabled]="(isProductFormValid | async) === false"
       mat-raised-button
       mat-dialog-close
       type="submit"
       color="primary"
-    >
-      Save
-    </button>
+      icon="save"
+    ></diadev-fab-icon-button>
   </div>
 </form>
