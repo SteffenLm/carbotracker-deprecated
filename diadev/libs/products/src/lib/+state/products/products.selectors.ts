@@ -1,4 +1,6 @@
+import { getEmptyProductsEntity, ProductsEntity } from './products.models';
 import { createFeatureSelector, createSelector } from '@ngrx/store';
+import { selectProductIdRouteParam } from './products.route.selectors';
 import {
   selectProductEntities,
   selectProducts,
@@ -35,6 +37,9 @@ export const selectSelectedId = createSelector(
 
 export const selectSelected = createSelector(
   selectProductsEntities,
-  selectSelectedId,
-  (entities, selectedId) => (selectedId ? entities[selectedId] : undefined),
+  selectProductIdRouteParam,
+  (entities, selectedId) =>
+    selectedId
+      ? (entities[selectedId] as ProductsEntity)
+      : getEmptyProductsEntity(),
 );

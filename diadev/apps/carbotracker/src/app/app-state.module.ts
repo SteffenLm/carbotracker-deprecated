@@ -4,11 +4,14 @@ import { StoreModule } from '@ngrx/store';
 import { EffectsModule } from '@ngrx/effects';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { environment } from '../environments/environment';
+import { routerReducer, StoreRouterConnectingModule } from '@ngrx/router-store';
 
 @NgModule({
   imports: [
     StoreModule.forRoot(
-      {},
+      {
+        router: routerReducer,
+      },
       {
         metaReducers: !environment.production ? [] : [],
         runtimeChecks: {
@@ -20,6 +23,7 @@ import { environment } from '../environments/environment';
       },
     ),
     EffectsModule.forRoot([]),
+    StoreRouterConnectingModule.forRoot(),
     !environment.production ? StoreDevtoolsModule.instrument() : [],
   ],
 })
