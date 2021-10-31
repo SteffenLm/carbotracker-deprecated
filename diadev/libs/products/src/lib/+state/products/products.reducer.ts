@@ -2,6 +2,7 @@ import { EntityState } from '@ngrx/entity';
 import { createReducer, on, Action } from '@ngrx/store';
 
 import * as ProductsActions from './products.actions';
+import * as ProductsPersistenceActions from '../products-persistence/products-persistence.actions';
 import { productsEntityAdapter } from './products.entity-adapter';
 import { ProductsEntity } from './products.models';
 
@@ -27,7 +28,7 @@ export const initialState: ProductsState =
 const productsReducer = createReducer(
   initialState,
   on(
-    ProductsActions.rehydrateProductsStateSuccess,
+    ProductsPersistenceActions.rehydrateProductsStateSuccess,
     (state, { productsState }): ProductsState => ({
       ...productsState,
       loaded: true,

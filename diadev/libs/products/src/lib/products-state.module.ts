@@ -5,6 +5,7 @@ import { EffectsModule } from '@ngrx/effects';
 import * as fromProducts from './+state/products/products.reducer';
 import { ProductsEffects } from './+state/products/products.effects';
 import { ProductsFacade } from './+state/products/products.facade';
+import { ProductsPersistenceEffects } from './+state/products-persistence/products-persistence.effects';
 
 @NgModule({
   imports: [
@@ -12,7 +13,7 @@ import { ProductsFacade } from './+state/products/products.facade';
       fromProducts.PRODUCTS_FEATURE_KEY,
       fromProducts.reducer,
     ),
-    EffectsModule.forFeature([ProductsEffects]),
+    EffectsModule.forFeature([ProductsEffects, ProductsPersistenceEffects]),
   ],
   providers: [ProductsFacade],
   declarations: [],

@@ -4,13 +4,8 @@ import { createEffect, Actions, ofType } from '@ngrx/effects';
 import { of } from 'rxjs';
 import { concatMap, map, switchMap } from 'rxjs/operators';
 
-import {
-  createLocalStorageLoader,
-  createLocalStorageSaver,
-} from '@diadev/localstorage';
-
 import * as ProductsActions from './products.actions';
-import * as ProductsFeature from './products.reducer';
+import * as rehydrateProductsState from '../products-persistence/products-persistence.actions';
 import * as ProductsSelectors from './products.selectors';
 
 @Injectable()
@@ -19,37 +14,7 @@ export class ProductsEffects {
     return this.actions$.pipe(
       ofType(ProductsActions.init),
       switchMap(() => {
-        return of(ProductsActions.rehydrateProductsState());
-      }),
-    );
-  });
-
-  loadProductsState$ = createEffect(() => {
-    return this.actions$.pipe(
-      ofType(ProductsActions.rehydrateProductsState),
-      map(() => {
-        try {
-          const productsState = this.loadProductsState();
-          return ProductsActions.rehydrateProductsStateSuccess({
-            productsState,
-          });
-        } catch (error) {
-          return ProductsActions.rehydrateProductsStateFailure();
-        }
-      }),
-    );
-  });
-
-  saveProductsState$ = createEffect(() => {
-    return this.actions$.pipe(
-      ofType(ProductsActions.hydrateProductsState),
-      map(({ productsState }) => {
-        try {
-          this.saveProductsState(productsState);
-          return ProductsActions.hydrateProductsStateSuccess();
-        } catch (error) {
-          return ProductsActions.hydrateProductsStateFailure();
-        }
+        return of(rehydrateProductsState.rehydrateProductsState());
       }),
     );
   });
@@ -64,7 +29,7 @@ export class ProductsEffects {
       ),
       concatMap(() => this.store.select(ProductsSelectors.selectProductsState)),
       map((productsState) =>
-        ProductsActions.hydrateProductsState({ productsState }),
+        rehydrateProductsState.hydrateProductsState({ productsState }),
       ),
     );
   });
@@ -73,13 +38,4 @@ export class ProductsEffects {
     private readonly actions$: Actions,
     private readonly store: Store,
   ) {}
-
-  private saveProductsState =
-    createLocalStorageSaver<ProductsFeature.ProductsState>(
-      ProductsFeature.PRODUCTS_FEATURE_KEY,
-    );
-  private loadProductsState =
-    createLocalStorageLoader<ProductsFeature.ProductsState>(
-      ProductsFeature.PRODUCTS_FEATURE_KEY,
-    );
 }
