@@ -36,7 +36,7 @@ const productsReducer = createReducer(
     }),
   ),
   on(
-    ProductsActions.addProduct,
+    ProductsActions.createProduct,
     (state, { product }): ProductsState =>
       productsEntityAdapter.addOne(product, state),
   ),

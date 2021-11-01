@@ -1,40 +1,40 @@
 import { NgModule } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
 import { MatInputModule } from '@angular/material/input';
-import {
-  MatDialogConfig,
-  MatDialogModule,
-  MAT_DIALOG_DEFAULT_OPTIONS,
-} from '@angular/material/dialog';
+
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatListModule } from '@angular/material/list';
 import { MatIconModule } from '@angular/material/icon';
+import {
+  MatSnackBarConfig,
+  MatSnackBarModule,
+  MAT_SNACK_BAR_DEFAULT_OPTIONS,
+} from '@angular/material/snack-bar';
 
 @NgModule({
   imports: [
     MatButtonModule,
-    MatDialogModule,
     MatFormFieldModule,
     MatIconModule,
     MatInputModule,
     MatListModule,
+    MatSnackBarModule,
   ],
   exports: [
     MatButtonModule,
-    MatDialogModule,
     MatFormFieldModule,
     MatIconModule,
     MatInputModule,
     MatListModule,
+    MatSnackBarModule,
   ],
   providers: [
     {
-      provide: MAT_DIALOG_DEFAULT_OPTIONS,
-      useFactory: (): MatDialogConfig => ({
-        maxWidth: '95vw',
-        width: '90vw',
-        panelClass: 'diadev-dialog-overlay',
-        hasBackdrop: true,
+      provide: MAT_SNACK_BAR_DEFAULT_OPTIONS,
+      useFactory: (): MatSnackBarConfig => ({
+        duration: 2000,
+        horizontalPosition: 'center',
+        verticalPosition: 'bottom',
       }),
     },
   ],

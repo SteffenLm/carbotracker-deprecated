@@ -4,9 +4,18 @@ import { ProductsEntity } from './products.models';
 
 export const init = createAction('[Products Page] Init');
 
-export const addProduct = createAction(
-  '[Products/API] Add Product',
+export const createProduct = createAction(
+  '[Products/API] Create Product',
   props<{ product: ProductsEntity }>(),
+);
+
+export const createProductSuccess = createAction(
+  '[Products/API] Create Product Success',
+  props<{ product: ProductsEntity }>(),
+);
+
+export const createProductFailure = createAction(
+  '[Products/API] Create Product Failure',
 );
 
 export const updateProduct = createAction(

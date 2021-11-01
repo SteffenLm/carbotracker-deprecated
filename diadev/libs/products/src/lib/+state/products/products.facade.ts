@@ -24,7 +24,7 @@ export class ProductsFacade {
       id: Date.now().toString(),
     };
     this.store.dispatch(
-      ProductsActions.addProduct({
+      ProductsActions.createProduct({
         product: newProduct,
       }),
     );

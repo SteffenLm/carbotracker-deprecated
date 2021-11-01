@@ -31,12 +31,16 @@ export class ProductsPersistenceEffects {
   saveProductsState$ = createEffect(() => {
     return this.actions$.pipe(
       ofType(ProductsPersistenceActions.hydrateProductsState),
-      map(({ productsState }) => {
+      map(({ productsState, sourceAction }) => {
         try {
           this.saveProductsState(productsState);
-          return ProductsPersistenceActions.hydrateProductsStateSuccess();
+          return ProductsPersistenceActions.hydrateProductsStateSuccess({
+            sourceAction,
+          });
         } catch (error) {
-          return ProductsPersistenceActions.hydrateProductsStateFailure();
+          return ProductsPersistenceActions.hydrateProductsStateFailure({
+            sourceAction,
+          });
         }
       }),
     );
