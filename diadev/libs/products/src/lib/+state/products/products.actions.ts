@@ -33,6 +33,12 @@ export const deleteProduct = createAction(
   props<{ productId: string }>(),
 );
 
-export const deleteSelectedProduct = createAction(
-  '[Products/API] Delete Selected Product',
+export const deleteProductSuccess = createAction(
+  '[Products/API] Delete Product Success',
+  props<{ productId: string }>(),
+);
+
+export const deleteProductFailure = createAction(
+  '[Products/API] Delete Product Failure',
+  props<{ productId: string }>(),
 );

@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Store } from '@ngrx/store';
+import { ActionCreator, Store } from '@ngrx/store';
 import { createEffect, Actions, ofType, concatLatestFrom } from '@ngrx/effects';
 import { Observable, of } from 'rxjs';
 import { filter, map, switchMap, tap } from 'rxjs/operators';
@@ -10,6 +10,7 @@ import * as ProductsPersistenceActions from '../products-persistence/products-pe
 import * as ProductsSelectors from './products.selectors';
 import { ProductsState } from './products.reducer';
 import { ActivatedRoute, Router } from '@angular/router';
+import { TypedAction } from '@ngrx/store/src/models';
 
 @Injectable()
 export class ProductsEffects {
@@ -28,7 +29,6 @@ export class ProductsEffects {
         ProductsActions.createProduct,
         ProductsActions.deleteProduct,
         ProductsActions.updateProduct,
-        ProductsActions.deleteSelectedProduct,
       ),
       concatLatestFrom(() => this.selectProductState()),
       map(([action, productsState]) =>
@@ -40,21 +40,43 @@ export class ProductsEffects {
     );
   });
 
-  createProductSuccess = createEffect(
+  deleteProductSuccess = createEffect(
     () => {
       return this.actions$.pipe(
         ofType(ProductsPersistenceActions.hydrateProductsStateSuccess),
         filter(
-          (action) =>
-            action.sourceAction.type === ProductsActions.createProduct.type,
+          ({ sourceAction }) =>
+            sourceAction.type === ProductsActions.deleteProduct.type,
         ),
-        tap(() => this.matSnackBar.open(`product created`)),
-        tap(() => {
-          console.log(this.route);
-          this.router.navigate([''], {
-            relativeTo: this.route,
-          });
-        }),
+        tap(() => this.openSnackBar('product deleted')),
+        tap(() => this.navigateToProductsList()),
+      );
+    },
+    { dispatch: false },
+  );
+
+  deleteProductFailure = createEffect(
+    () => {
+      return this.actions$.pipe(
+        ofType(ProductsPersistenceActions.hydrateProductsStateFailure),
+        filter((action) =>
+          this.IsAction(action.sourceAction, ProductsActions.deleteProduct),
+        ),
+        tap(() => this.openSnackBar('product deletion failed')),
+      );
+    },
+    { dispatch: false },
+  );
+
+  createProductSuccess = createEffect(
+    () => {
+      return this.actions$.pipe(
+        ofType(ProductsPersistenceActions.hydrateProductsStateSuccess),
+        filter((action) =>
+          this.IsAction(action.sourceAction, ProductsActions.createProduct),
+        ),
+        tap(() => this.openSnackBar(`product created`)),
+        tap(() => this.navigateToProductsList()),
       );
     },
     { dispatch: false },
@@ -63,8 +85,11 @@ export class ProductsEffects {
   createProductFailure = createEffect(
     () => {
       return this.actions$.pipe(
-        ofType(ProductsActions.createProductFailure),
-        tap(() => this.matSnackBar.open(`product creation failed`)),
+        ofType(ProductsPersistenceActions.hydrateProductsStateFailure),
+        filter((action) =>
+          this.IsAction(action.sourceAction, ProductsActions.createProduct),
+        ),
+        tap(() => this.openSnackBar('product creation failed')),
       );
     },
     { dispatch: false },
@@ -80,5 +105,22 @@ export class ProductsEffects {
 
   private selectProductState(): Observable<ProductsState> {
     return this.store.select(ProductsSelectors.selectProductsState);
+  }
+
+  private openSnackBar(message: string) {
+    this.matSnackBar.open(message);
+  }
+
+  private navigateToProductsList(): void {
+    this.router.navigate(['../'], {
+      relativeTo: this.route,
+    });
+  }
+
+  private IsAction(
+    sourceAction: TypedAction<string>,
+    filteringAction: ActionCreator,
+  ) {
+    return sourceAction.type === filteringAction.type;
   }
 }
