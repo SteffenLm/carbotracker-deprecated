@@ -146,6 +146,31 @@
         }
       }
     },
+    "meals": {
+      "projectType": "library",
+      "root": "libs/meals",
+      "sourceRoot": "libs/meals/src",
+      "prefix": "diadev",
+      "architect": {
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "outputs": ["coverage/libs/meals"],
+          "options": {
+            "jestConfig": "libs/meals/jest.config.js",
+            "passWithNoTests": true
+          }
+        },
+        "lint": {
+          "builder": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": [
+              "libs/meals/src/**/*.ts",
+              "libs/meals/src/**/*.html"
+            ]
+          }
+        }
+      }
+    },
     "products": {
       "projectType": "library",
       "root": "libs/products",
