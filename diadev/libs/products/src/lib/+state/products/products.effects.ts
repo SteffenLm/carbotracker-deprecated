@@ -27,8 +27,8 @@ export class ProductsEffects {
     return this.actions$.pipe(
       ofType(
         ProductsActions.createProduct,
-        ProductsActions.deleteProduct,
         ProductsActions.updateProduct,
+        ProductsActions.deleteProduct,
       ),
       concatLatestFrom(() => this.selectProductState()),
       map(([action, productsState]) =>
@@ -90,6 +90,33 @@ export class ProductsEffects {
           this.IsAction(action.sourceAction, ProductsActions.createProduct),
         ),
         tap(() => this.openSnackBar('product creation failed')),
+      );
+    },
+    { dispatch: false },
+  );
+
+  updateProductSuccess = createEffect(
+    () => {
+      return this.actions$.pipe(
+        ofType(ProductsPersistenceActions.hydrateProductsStateSuccess),
+        filter((action) =>
+          this.IsAction(action.sourceAction, ProductsActions.updateProduct),
+        ),
+        tap(() => this.openSnackBar('product updated')),
+        tap(() => this.navigateToProductsList()),
+      );
+    },
+    { dispatch: false },
+  );
+
+  updateProductFailure = createEffect(
+    () => {
+      return this.actions$.pipe(
+        ofType(ProductsPersistenceActions.hydrateProductsStateFailure),
+        filter((action) =>
+          this.IsAction(action.sourceAction, ProductsActions.updateProduct),
+        ),
+        tap(() => this.openSnackBar('product update failed')),
       );
     },
     { dispatch: false },

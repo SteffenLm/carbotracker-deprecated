@@ -9,7 +9,6 @@
 </diadev-toolbar>
 <form
   *ngIf="(selectedProduct | async) !== undefined; else notfound"
-  (ngSubmit)="onSubmit()"
   [formGroup]="this.productForm.getAsFormGroup()"
   style="display: flex; flex-direction: column; padding: 1rem"
 >
@@ -25,9 +24,11 @@
     style="display: flex; flex-direction: row; justify-content: space-around"
   >
     <diadev-fab-icon-button
+      *ngIf="selectedProduct | async as selectedProduct"
       [disabled]="(isProductFormValid | async) === false"
       mat-raised-button
-      type="submit"
+      (click)="onSubmit(selectedProduct.id)"
+      type="button"
       color="primary"
       icon="save"
     ></diadev-fab-icon-button>

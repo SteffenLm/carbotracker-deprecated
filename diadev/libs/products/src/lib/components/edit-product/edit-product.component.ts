@@ -5,6 +5,7 @@ import { tap } from 'rxjs/operators';
 import { ProductsFacade } from '../../+state/products/products.facade';
 import { ProductForm } from '../../forms/product-form';
 import { ProductFormFactory } from '../../forms/product-form-factory';
+import { ProductFormValue } from '../../model/product-form-value.model';
 
 @Component({
   selector: 'diadev-edit-product-component',
@@ -32,11 +33,26 @@ export class EditProductComponent {
     public readonly productForm: ProductForm,
   ) {}
 
-  public onSubmit(): void {
-    this.productsFacade.updateSelectedProduct(this.productForm.getValue());
+  public onSubmit(productId: string): void {
+    const updatedProduct = this.mapProductFormValueToProductEntity(
+      this.productForm.getValue(),
+      productId,
+    );
+    this.productsFacade.updateProduct(updatedProduct);
   }
 
   public onDeleteProduct(id: string): void {
     this.productsFacade.deleteProduct(id);
+  }
+
+  private mapProductFormValueToProductEntity(
+    productFormValue: ProductFormValue,
+    id: string,
+  ): ProductsEntity {
+    return {
+      name: productFormValue.name,
+      carbohydratesPer100Gram: +productFormValue.carbohydratesPer100Gram,
+      id,
+    };
   }
 }

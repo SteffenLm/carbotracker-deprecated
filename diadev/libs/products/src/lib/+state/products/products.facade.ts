@@ -1,8 +1,6 @@
 import { Injectable } from '@angular/core';
-import { Update } from '@ngrx/entity';
 import { Store } from '@ngrx/store';
 
-import { ProductFormValue } from '../../model/product-form-value.model';
 import { ProductsEntity } from './products.models';
 
 import * as ProductsActions from './products.actions';
@@ -30,16 +28,14 @@ export class ProductsFacade {
     );
   }
 
-  public updateProduct(updatedProduct: Update<ProductsEntity>): void {
-    this.store.dispatch(ProductsActions.updateProduct({ updatedProduct }));
-  }
-
-  public updateSelectedProduct(updatedProduct: ProductFormValue) {
+  public updateProduct(updatedProduct: ProductsEntity): void {
     this.store.dispatch(
-      ProductsActions.updateSelectedProduct({
+      ProductsActions.updateProduct({
         updatedProduct: {
-          name: updatedProduct.name,
-          carbohydratesPer100Gram: +updatedProduct.carbohydratesPer100Gram,
+          id: updatedProduct.id,
+          changes: {
+            ...updatedProduct,
+          },
         },
       }),
     );

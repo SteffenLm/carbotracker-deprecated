@@ -23,9 +23,12 @@ export const updateProduct = createAction(
   props<{ updatedProduct: Update<ProductsEntity> }>(),
 );
 
-export const updateSelectedProduct = createAction(
-  '[Products/API] Update Selected Product',
-  props<{ updatedProduct: Partial<ProductsEntity> }>(),
+export const updateProductSuccess = createAction(
+  '[Products/API] Update Product Success',
+);
+
+export const updateProductFailure = createAction(
+  '[Products/API] Update Product Failure',
 );
 
 export const deleteProduct = createAction(

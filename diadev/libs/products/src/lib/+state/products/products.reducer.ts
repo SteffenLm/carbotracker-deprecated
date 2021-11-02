@@ -45,23 +45,6 @@ const productsReducer = createReducer(
     (state, { updatedProduct: product }): ProductsState =>
       productsEntityAdapter.updateOne(product, state),
   ),
-  on(ProductsActions.updateSelectedProduct, (state, action): ProductsState => {
-    if (state.selectedId) {
-      const { name, carbohydratesPer100Gram } = action.updatedProduct;
-      return productsEntityAdapter.updateOne(
-        {
-          id: state.selectedId,
-          changes: {
-            name,
-            carbohydratesPer100Gram,
-          },
-        },
-        state,
-      );
-    } else {
-      return state;
-    }
-  }),
   on(
     ProductsActions.deleteProduct,
     (state, { productId }): ProductsState =>
