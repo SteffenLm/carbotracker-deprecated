@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { ProductsEntity } from '@diadev/products';
+import { ProductsEntity } from '../../+state/products/products.models';
 import { Observable } from 'rxjs';
 import { tap } from 'rxjs/operators';
 import { ProductsFacade } from '../../+state/products/products.facade';
