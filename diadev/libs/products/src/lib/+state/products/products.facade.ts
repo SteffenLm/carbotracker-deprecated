@@ -48,8 +48,4 @@ export class ProductsFacade {
   public deleteProduct(productId: string): void {
     this.store.dispatch(ProductsActions.deleteProduct({ productId }));
   }
-
-  public deleteSelectedProduct(): void {
-    this.store.dispatch(ProductsActions.deleteSelectedProduct());
-  }
 }

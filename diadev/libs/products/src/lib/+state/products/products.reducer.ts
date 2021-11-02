@@ -67,13 +67,6 @@ const productsReducer = createReducer(
     (state, { productId }): ProductsState =>
       productsEntityAdapter.removeOne(productId, state),
   ),
-  on(ProductsActions.deleteSelectedProduct, (state): ProductsState => {
-    if (state.selectedId) {
-      return productsEntityAdapter.removeOne(state.selectedId as string, state);
-    } else {
-      return state;
-    }
-  }),
 );
 
 export function reducer(state: ProductsState | undefined, action: Action) {
