@@ -2,7 +2,11 @@ import { NgModule } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
 import { MatInputModule } from '@angular/material/input';
 
-import { MatFormFieldModule } from '@angular/material/form-field';
+import {
+  MatFormFieldDefaultOptions,
+  MatFormFieldModule,
+  MAT_FORM_FIELD_DEFAULT_OPTIONS,
+} from '@angular/material/form-field';
 import { MatListModule } from '@angular/material/list';
 import { MatIconModule } from '@angular/material/icon';
 import {
@@ -35,6 +39,12 @@ import {
         duration: 2000,
         horizontalPosition: 'center',
         verticalPosition: 'bottom',
+      }),
+    },
+    {
+      provide: MAT_FORM_FIELD_DEFAULT_OPTIONS,
+      useFactory: (): MatFormFieldDefaultOptions => ({
+        appearance: 'outline',
       }),
     },
   ],
