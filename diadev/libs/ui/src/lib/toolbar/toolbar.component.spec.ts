@@ -1,5 +1,6 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-
+import { MATERIAL_SANITY_CHECKS } from '@angular/material/core';
+import { UiMaterialModule } from '../ui.material.module';
 import { ToolbarComponent } from './toolbar.component';
 
 describe('ToolbarComponent', () => {
@@ -8,9 +9,10 @@ describe('ToolbarComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ ToolbarComponent ]
-    })
-    .compileComponents();
+      declarations: [ToolbarComponent],
+      imports: [UiMaterialModule],
+      providers: [{ provide: MATERIAL_SANITY_CHECKS, useValue: false }],
+    }).compileComponents();
   });
 
   beforeEach(() => {
