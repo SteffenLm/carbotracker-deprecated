@@ -1,0 +1,30 @@
+<diadev-toolbar [enableBackNavigation]="true" title="create product">
+  <button routerLink="../" mat-icon-button>
+    <mat-icon> close </mat-icon>
+  </button>
+</diadev-toolbar>
+<form
+  (ngSubmit)="onSubmit()"
+  [formGroup]="this.productForm.getAsFormGroup()"
+  style="display: flex; flex-direction: column; padding: 1rem"
+>
+  <mat-form-field>
+    <mat-label formGroupBane>Product name</mat-label>
+    <input type="text" formControlName="name" matInput />
+  </mat-form-field>
+  <mat-form-field>
+    <mat-label>Carbohydrates per 100g</mat-label>
+    <input type="number" formControlName="carbohydratesPer100Gram" matInput />
+  </mat-form-field>
+  <div
+    style="display: flex; flex-direction: row; justify-content: space-around"
+  >
+    <diadev-fab-icon-button
+      [disabled]="(isProductFormValid | async) === false"
+      mat-raised-button
+      (click)="onSubmit()"
+      color="primary"
+      icon="save"
+    ></diadev-fab-icon-button>
+  </div>
+</form>

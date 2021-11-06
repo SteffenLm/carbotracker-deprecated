@@ -1,0 +1,44 @@
+<diadev-toolbar [enableBackNavigation]="true" title="edit product">
+  <button
+    *ngIf="selectedProduct | async as selectedProduct"
+    (click)="onDeleteProduct(selectedProduct.id)"
+    mat-icon-button
+  >
+    <mat-icon>delete</mat-icon>
+  </button>
+</diadev-toolbar>
+<form
+  *ngIf="(selectedProduct | async) !== undefined; else notfound"
+  [formGroup]="this.productForm.getAsFormGroup()"
+  style="display: flex; flex-direction: column; padding: 1rem"
+>
+  <mat-form-field>
+    <mat-label formGroupBane>Product name</mat-label>
+    <input type="text" formControlName="name" matInput />
+  </mat-form-field>
+  <mat-form-field>
+    <mat-label>Carbohydrates per 100g</mat-label>
+    <input type="number" formControlName="carbohydratesPer100Gram" matInput />
+  </mat-form-field>
+  <div
+    style="display: flex; flex-direction: row; justify-content: space-around"
+  >
+    <diadev-fab-icon-button
+      *ngIf="selectedProduct | async as selectedProduct"
+      [disabled]="(isProductFormValid | async) === false"
+      mat-raised-button
+      (click)="onSubmit(selectedProduct.id)"
+      type="button"
+      color="primary"
+      icon="save"
+    ></diadev-fab-icon-button>
+  </div>
+</form>
+<ng-template #notfound>
+  <div style="margin: 1rem">
+    <div>This product does not exist anymore.</div>
+    <button mat-raised-button color="primary" routerLink="../">
+      <mat-icon>chevron_left</mat-icon>GO BACK
+    </button>
+  </div>
+</ng-template>
