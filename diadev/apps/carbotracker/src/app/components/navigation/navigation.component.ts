@@ -14,22 +14,22 @@ export class NavigationComponent {
       path: '/products',
       text: 'products',
     },
-    {
-      path: '/current-meal',
-      text: 'current meal',
-    },
-    {
-      path: '/life-events',
-      text: 'life events',
-    },
-    {
-      path: '/carbo-factors',
-      text: 'carbo factors',
-    },
-    {
-      path: 'settings',
-      text: 'settings',
-    },
+    // {
+    //   path: '/current-meal',
+    //   text: 'current meal',
+    // },
+    // {
+    //   path: '/life-events',
+    //   text: 'life events',
+    // },
+    // {
+    //   path: '/carbo-factors',
+    //   text: 'carbo factors',
+    // },
+    // {
+    //   path: 'settings',
+    //   text: 'settings',
+    // },
   ];
 
   isHandset$: Observable<boolean> = this.breakpointObserver
