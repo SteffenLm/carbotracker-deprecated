@@ -1,36 +1,37 @@
 import { createFeatureSelector, createSelector } from '@ngrx/store';
-import { MEALS_FEATURE_KEY, State, mealsAdapter } from './meals.reducer';
+import { selectMealEntities, selectMeals } from './meals.entity-adapter';
+import { MEALS_FEATURE_KEY, MealsState } from './meals.reducer';
 
-// Lookup the 'Meals' feature state managed by NgRx
-export const getMealsState = createFeatureSelector<State>(MEALS_FEATURE_KEY);
+export const selectMealsState =
+  createFeatureSelector<MealsState>(MEALS_FEATURE_KEY);
 
-const { selectAll, selectEntities } = mealsAdapter.getSelectors();
-
-export const getMealsLoaded = createSelector(
-  getMealsState,
-  (state: State) => state.loaded,
+export const selectMealsLoaded = createSelector(
+  selectMealsState,
+  (state: MealsState) => state.loaded,
 );
 
-export const getMealsError = createSelector(
-  getMealsState,
-  (state: State) => state.error,
+export const selectMealsError = createSelector(
+  selectMealsState,
+  (state: MealsState) => state.error,
 );
 
-export const getAllMeals = createSelector(getMealsState, (state: State) =>
-  selectAll(state),
+export const selectAllMeals = createSelector(
+  selectMealsState,
+  (state: MealsState) => selectMeals(state),
 );
 
-export const getMealsEntities = createSelector(getMealsState, (state: State) =>
-  selectEntities(state),
+export const selectMealsEntities = createSelector(
+  selectMealsState,
+  (state: MealsState) => selectMealEntities(state),
 );
 
-export const getSelectedId = createSelector(
-  getMealsState,
-  (state: State) => state.selectedId,
+export const selectSelectedId = createSelector(
+  selectMealsState,
+  (state: MealsState) => state.selectedId,
 );
 
-export const getSelected = createSelector(
-  getMealsEntities,
-  getSelectedId,
+export const selectSelected = createSelector(
+  selectMealsEntities,
+  selectSelectedId,
   (entities, selectedId) => (selectedId ? entities[selectedId] : undefined),
 );

@@ -1,41 +1,42 @@
-import { EntityState, EntityAdapter, createEntityAdapter } from '@ngrx/entity';
-import { createReducer, on, Action } from '@ngrx/store';
+import { EntityState } from '@ngrx/entity';
+import { createReducer, on } from '@ngrx/store';
 
 import * as MealsActions from './meals.actions';
+import * as MealsPersistenceActions from './meals-persistence/meals-persistence.actions';
+import { mealsEntityAdapter } from './meals.entity-adapter';
 import { MealsEntity } from './meals.models';
 
 export const MEALS_FEATURE_KEY = 'meals';
 
-export interface State extends EntityState<MealsEntity> {
-  selectedId?: string | number; // which Meals record has been selected
-  loaded: boolean; // has the Meals list been loaded
-  error?: string | null; // last known error (if any)
+export interface MealsState extends EntityState<MealsEntity> {
+  selectedId: string | null;
+  loaded: boolean;
+  error: string | null;
 }
 
 export interface MealsPartialState {
-  readonly [MEALS_FEATURE_KEY]: State;
+  readonly [MEALS_FEATURE_KEY]: MealsState;
 }
 
-export const mealsAdapter: EntityAdapter<MealsEntity> =
-  createEntityAdapter<MealsEntity>();
-
-export const initialState: State = mealsAdapter.getInitialState({
-  // set initial required properties
+export const initialState: MealsState = mealsEntityAdapter.getInitialState({
+  selectedId: null,
   loaded: false,
+  error: null,
 });
 
-const mealsReducer = createReducer(
+export const mealsReducer = createReducer(
   initialState,
-  on(MealsActions.init, (state) => ({ ...state, loaded: false, error: null })),
-  on(MealsActions.loadMealsSuccess, (state, { meals }) =>
-    mealsAdapter.setAll(meals, { ...state, loaded: true }),
+  on(
+    MealsPersistenceActions.rehydrateMealsStateSuccess,
+    (state, { mealsState }): MealsState => {
+      return {
+        ...mealsState,
+        loaded: true,
+        error: null,
+      };
+    },
   ),
-  on(MealsActions.loadMealsFailure, (state, { error }) => ({
-    ...state,
-    error,
-  })),
+  on(MealsActions.createMeal, (state, action): MealsState => {
+    return mealsEntityAdapter.addOne(action.meal, state);
+  }),
 );
-
-export function reducer(state: State | undefined, action: Action) {
-  return mealsReducer(state, action);
-}

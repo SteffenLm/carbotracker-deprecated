@@ -1,0 +1,46 @@
+<diadev-toolbar title="Create Meal Entry"></diadev-toolbar>
+<form
+  (ngSubmit)="onSubmit()"
+  [formGroup]="this.mealEntryFormGroup"
+  style="display: flex; flex-direction: column; padding: 1rem"
+>
+  <mat-form-field>
+    <mat-label>Product name</mat-label>
+    <input
+      type="text"
+      formControlName="product"
+      matInput
+      placeholder="Pick a Product"
+      [matAutocomplete]="auto"
+    />
+    <mat-autocomplete
+      #auto="matAutocomplete"
+      [displayWith]="displaySelectedProduct"
+    >
+      <mat-option
+        *ngFor="let product of filteredProducts | async"
+        [value]="product"
+      >
+        {{ product.name }}
+      </mat-option>
+    </mat-autocomplete>
+  </mat-form-field>
+  <mat-form-field>
+    <mat-label>Amount</mat-label>
+    <input type="number" formControlName="amount" matInput />
+  </mat-form-field>
+  <div
+    style="display: flex; flex-direction: row; justify-content: space-around"
+  >
+    <button mat-button mat-dialog-close type="button">Abort</button>
+    <button
+      [disabled]="this.mealEntryFormGroup.invalid"
+      mat-raised-button
+      mat-dialog-close
+      type="submit"
+      color="primary"
+    >
+      Save
+    </button>
+  </div>
+</form>

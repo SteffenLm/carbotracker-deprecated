@@ -11,14 +11,14 @@ import { MealsFacade } from './meals.facade';
 import { MealsEntity } from './meals.models';
 import {
   MEALS_FEATURE_KEY,
-  State,
+  MealsState,
   initialState,
   reducer,
 } from './meals.reducer';
 import * as MealsSelectors from './meals.selectors';
 
 interface TestSchema {
-  meals: State;
+  meals: MealsState;
 }
 
 describe('MealsFacade', () => {

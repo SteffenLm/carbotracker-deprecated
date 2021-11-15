@@ -1,0 +1,16 @@
+<diadev-toolbar [title]="''">
+  <button mat-icon-button (click)="onDeleteCurrentMeal()">
+    <mat-icon>delete</mat-icon>
+  </button>
+</diadev-toolbar>
+<mat-list>
+  <mat-list-item
+    *ngFor="let mealEntry of this.allMealEntries | async"
+    [routerLink]="mealEntry.id"
+  >
+    {{ mealEntry.name }}
+  </mat-list-item>
+</mat-list>
+
+<diadev-fab-icon-button routerLink="create" color="primary" icon="add">
+</diadev-fab-icon-button>

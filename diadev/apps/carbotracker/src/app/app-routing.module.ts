@@ -12,7 +12,10 @@ const routes: Routes = [
     loadChildren: () =>
       import('@diadev/products').then((m) => m.ProductsModule),
   },
-
+  {
+    path: 'current-meal',
+    loadChildren: () => import('@diadev/meals').then((m) => m.MealsModule),
+  },
   {
     path: '**',
     redirectTo: 'products',

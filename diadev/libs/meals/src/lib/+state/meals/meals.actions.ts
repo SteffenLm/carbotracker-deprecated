@@ -3,12 +3,28 @@ import { MealsEntity } from './meals.models';
 
 export const init = createAction('[Meals Page] Init');
 
-export const loadMealsSuccess = createAction(
-  '[Meals/API] Load Meals Success',
-  props<{ meals: MealsEntity[] }>(),
+export const createMeal = createAction(
+  '[Meals/API] Create Meal',
+  props<{ meal: MealsEntity }>(),
 );
 
-export const loadMealsFailure = createAction(
-  '[Meals/API] Load Meals Failure',
-  props<{ error: any }>(),
+export const createMealSuccess = createAction(
+  '[Meals/API] Create Meal Success',
+  props<{ meal: MealsEntity }>(),
+);
+
+export const createMealFailure = createAction(
+  '[Meals/API] Create Meal Failure',
+);
+
+export const deleteCurrentMeal = createAction(
+  '[Meals/API] Delete Current Meal',
+);
+
+export const deleteCurrentMealSuccess = createAction(
+  '[Meals/API] Delete Current Meal Success',
+);
+
+export const deleteCurrentMealFailure = createAction(
+  '[Meals/API] Delete Current Meal Failure',
 );

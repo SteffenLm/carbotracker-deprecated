@@ -2,7 +2,7 @@ import { Action } from '@ngrx/store';
 
 import * as MealsActions from './meals.actions';
 import { MealsEntity } from './meals.models';
-import { State, initialState, reducer } from './meals.reducer';
+import { MealsState, initialState, reducer } from './meals.reducer';
 
 describe('Meals Reducer', () => {
   const createMealsEntity = (id: string, name = ''): MealsEntity => ({
@@ -18,7 +18,7 @@ describe('Meals Reducer', () => {
       ];
       const action = MealsActions.loadMealsSuccess({ meals });
 
-      const result: State = reducer(initialState, action);
+      const result: MealsState = reducer(initialState, action);
 
       expect(result.loaded).toBe(true);
       expect(result.ids.length).toBe(2);
