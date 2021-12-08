@@ -1,4 +1,4 @@
-import { ProductsEntity } from './products.models';
+import { ProductsEntity } from '../products.models';
 import { createEntityAdapter, EntityAdapter } from '@ngrx/entity';
 
 export const productsEntityAdapter: EntityAdapter<ProductsEntity> =

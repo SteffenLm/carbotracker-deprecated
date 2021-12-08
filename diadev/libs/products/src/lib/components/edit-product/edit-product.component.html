@@ -1,4 +1,9 @@
-<diadev-toolbar [enableBackNavigation]="true" title="edit product">
+<diadev-toolbar
+  routerLink="../"
+  [enableBackNavigation]="true"
+  (clickBackNavigation)="onClickBackNavigation()"
+  title="edit product"
+>
   <button
     *ngIf="selectedProduct | async as selectedProduct"
     (click)="onDeleteProduct(selectedProduct.id)"
@@ -27,6 +32,7 @@
       *ngIf="selectedProduct | async as selectedProduct"
       [disabled]="(isProductFormValid | async) === false"
       mat-raised-button
+      routerLink="../"
       (click)="onSubmit(selectedProduct.id)"
       type="button"
       color="primary"

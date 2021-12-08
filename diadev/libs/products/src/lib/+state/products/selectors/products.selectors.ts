@@ -1,11 +1,14 @@
-import { getEmptyProductsEntity, ProductsEntity } from './products.models';
+import { getEmptyProductsEntity, ProductsEntity } from '../products.models';
 import { createFeatureSelector, createSelector } from '@ngrx/store';
-import { selectProductIdRouteParam } from './products.route.selectors';
+import { selectProductId } from './products.route.selectors';
 import {
   selectProductEntities,
   selectProducts,
-} from './products.entity-adapter';
-import { PRODUCTS_FEATURE_KEY, ProductsState } from './products.reducer';
+} from '../model/products.entity-adapter';
+import {
+  ProductsState,
+  PRODUCTS_FEATURE_KEY,
+} from '../model/products-state.model';
 
 export const selectProductsState =
   createFeatureSelector<ProductsState>(PRODUCTS_FEATURE_KEY);
@@ -37,7 +40,7 @@ export const selectSelectedId = createSelector(
 
 export const selectSelected = createSelector(
   selectProductsEntities,
-  selectProductIdRouteParam,
+  selectProductId,
   (entities, selectedId) =>
     selectedId
       ? (entities[selectedId] as ProductsEntity)
