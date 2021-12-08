@@ -6,6 +6,7 @@ import { SystemApiActions } from './+state/products/actions/api';
 import {
   ProductsLocalStorageEffects,
   ProductsSnackBarEffects,
+  ProductsRoutingEffects,
 } from './+state/products/effects';
 import { PRODUCTS_FEATURE_KEY } from './+state/products/model/products-state.model';
 import { productsReducer } from './+state/products/reducers/products.reducer';
@@ -16,6 +17,7 @@ import { productsReducer } from './+state/products/reducers/products.reducer';
     EffectsModule.forFeature([
       ProductsLocalStorageEffects,
       ProductsSnackBarEffects,
+      ProductsRoutingEffects,
     ]),
   ],
   providers: [],
