@@ -12,3 +12,7 @@ export const deleteProduct = createAction(
 );
 
 export const navigateBack = createAction('[Product Edit Page] Navigate Back');
+
+export const goBackToProducts = createAction(
+  '[Product Edit Page | Product Not Found] Go Back to Products',
+);

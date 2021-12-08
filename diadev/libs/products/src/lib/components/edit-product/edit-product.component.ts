@@ -56,6 +56,10 @@ export class EditProductComponent {
     this.store.dispatch(ProductEditPageActions.navigateBack());
   }
 
+  public onGoBack(): void {
+    this.store.dispatch(ProductEditPageActions.goBackToProducts());
+  }
+
   private mapProductFormValueToProductEntity(
     productFormValue: ProductFormValue,
     id: string,
