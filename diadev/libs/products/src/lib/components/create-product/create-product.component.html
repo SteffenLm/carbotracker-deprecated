@@ -1,10 +1,9 @@
 <diadev-toolbar
-  routerLink="../"
   (clickBackNavigation)="onClickBackNavigation()"
   [enableBackNavigation]="true"
   title="create product"
 >
-  <button routerLink="../" (click)="onClose()" mat-icon-button>
+  <button (click)="onClose()" mat-icon-button>
     <mat-icon> close </mat-icon>
   </button>
 </diadev-toolbar>
@@ -28,7 +27,6 @@
       mat-raised-button
       (click)="onSave()"
       color="primary"
-      routerLink="../"
       icon="save"
     ></diadev-fab-icon-button>
   </div>
