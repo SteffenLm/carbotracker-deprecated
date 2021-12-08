@@ -10,6 +10,7 @@ import { ProductsRoutingModule } from './products-routing.module';
 import { ProductListComponent } from './components/product-list/product-list.component';
 import { EditProductComponent } from './components/edit-product/edit-product.component';
 import { CreateProductComponent } from './components/create-product/create-product.component';
+import { ProductsRoutingService } from './services/products-routing.service';
 
 @NgModule({
   imports: [
@@ -25,5 +26,6 @@ import { CreateProductComponent } from './components/create-product/create-produ
     EditProductComponent,
     CreateProductComponent,
   ],
+  providers: [ProductsRoutingService],
 })
 export class ProductsModule {}
