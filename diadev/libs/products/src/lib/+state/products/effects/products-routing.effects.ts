@@ -5,7 +5,7 @@ import {
   ProductCreatePageActions,
   ProductEditPageActions,
   ProductListPageActions,
-} from '@diadev/products';
+} from '../actions';
 import { ProductsRoutingService } from '../../../services/products-routing.service';
 
 @Injectable()

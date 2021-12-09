@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { tap } from 'rxjs/operators';
 import { createEffect, Actions, ofType } from '@ngrx/effects';
 import { MatSnackBar } from '@angular/material/snack-bar';
-import { LocalStorageApiActions } from '@diadev/products';
+import { LocalStorageApiActions } from '../actions';
 
 @Injectable()
 export class ProductsSnackBarEffects {

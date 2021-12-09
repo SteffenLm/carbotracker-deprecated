@@ -1,5 +1,5 @@
-import { ProductsEntity } from '@diadev/products';
 import { createAction, props } from '@ngrx/store';
+import { ProductsEntity } from '../../products.models';
 
 export const saveProduct = createAction(
   '[Product Create Page] Save Product',
