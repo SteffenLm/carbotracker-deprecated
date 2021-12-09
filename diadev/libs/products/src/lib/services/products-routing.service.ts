@@ -7,9 +7,7 @@ export class ProductsRoutingService {
   constructor(
     @Inject(PRODUCTS_ROUTING_PATH) private readonly urlBasePath: string,
     private readonly router: Router,
-  ) {
-    console.log(urlBasePath);
-  }
+  ) {}
 
   public navigateToProductsPage(): void {
     this.router.navigate([this.urlBasePath]);

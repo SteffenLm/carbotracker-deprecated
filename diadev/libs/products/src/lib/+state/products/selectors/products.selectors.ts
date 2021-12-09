@@ -1,7 +1,7 @@
 import {
   getEmptyProductsEntity,
   ProductsEntity,
-} from '../products-entity.model';
+} from '../../../model/products-entity.model';
 import { createFeatureSelector, createSelector } from '@ngrx/store';
 import { selectProductId } from './products.route.selectors';
 import {

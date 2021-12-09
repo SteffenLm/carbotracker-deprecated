@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { ProductsEntity } from '../../+state/products/products-entity.model';
+import { ProductsEntity } from '../../model/products-entity.model';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
 import { ProductCreatePageActions } from '../../+state/products/actions/ui';
