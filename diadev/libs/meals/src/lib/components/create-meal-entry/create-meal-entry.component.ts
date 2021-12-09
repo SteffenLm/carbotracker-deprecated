@@ -1,10 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Store } from '@ngrx/store';
 import { combineLatest, Observable } from 'rxjs';
 import { filter, map, startWith } from 'rxjs/operators';
 import { ProductsEntity } from '@diadev/products';
-import { selectAllProducts } from '@diadev/products';
+import { ProductsSelectors } from '@diadev/products';
 
 @Component({
   selector: 'diadev-create-meal-entry',
@@ -21,7 +21,7 @@ export class CreateMealEntryComponent {
   ) {
     this.mealEntryFormGroup = this.createMealEntryFormGroup();
     this.filteredProducts = combineLatest([
-      this.store.select(selectAllProducts),
+      this.store.select(ProductsSelectors.selectAllProducts),
       this.mealEntryFormGroup.controls.product.valueChanges.pipe(
         startWith(''),
         filter((value) => typeof value === 'string'),
@@ -39,16 +39,16 @@ export class CreateMealEntryComponent {
   }
 
   public onSubmit(): void {
-    const selectedProduct = this.mealEntryFormGroup.controls.product
-      .value as ProductsEntity;
-    const enteredAmount = this.mealEntryFormGroup.controls.amount
-      .value as string;
-    const newMealEntry = {
-      id: selectedProduct.id,
-      amount: +enteredAmount,
-      name: selectedProduct.name,
-      carbohydratesPer100g: selectedProduct.carbohydratesPer100Gram,
-    };
+    // const selectedProduct = this.mealEntryFormGroup.controls.product
+    //   .value as ProductsEntity;
+    // const enteredAmount = this.mealEntryFormGroup.controls.amount
+    //   .value as string;
+    // const newMealEntry = {
+    //   id: selectedProduct.id,
+    //   amount: +enteredAmount,
+    //   name: selectedProduct.name,
+    //   carbohydratesPer100g: selectedProduct.carbohydratesPer100Gram,
+    // };
     // this.store.dispatch(addMealEntry(newMealEntry));
   }
 
