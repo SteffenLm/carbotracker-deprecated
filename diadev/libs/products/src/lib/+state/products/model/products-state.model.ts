@@ -1,5 +1,5 @@
 import { EntityState } from '@ngrx/entity';
-import { ProductsEntity } from '../products.models';
+import { ProductsEntity } from '../products-entity.model';
 
 export const PRODUCTS_FEATURE_KEY = 'products';
 

@@ -2,7 +2,7 @@ import { Update } from '@ngrx/entity';
 import { createReducer, on } from '@ngrx/store';
 
 import { productsEntityAdapter } from '../model/products.entity-adapter';
-import { ProductsEntity } from '../products.models';
+import { ProductsEntity } from '../products-entity.model';
 import {
   ProductCreatePageActions,
   ProductEditPageActions,

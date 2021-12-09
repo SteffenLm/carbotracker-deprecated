@@ -21,7 +21,3 @@ export const getEmptyProductsEntity = (): ProductsEntity => ({
   name: '',
   carbohydratesPer100Gram: 0,
 });
-
-// publicloaded$ = this.store.select(ProductsSelectors.selectProductsLoaded);
-// allProducts$ = this.store.select(ProductsSelectors.selectAllProducts);
-// selectedProducts$ = this.store.select(ProductsSelectors.selectSelected);

@@ -1,5 +1,5 @@
 import { createAction, props } from '@ngrx/store';
-import { ProductsEntity } from '../../products.models';
+import { ProductsEntity } from '../../products-entity.model';
 
 export const updateProduct = createAction(
   '[Product Edit Page] Update Product',
