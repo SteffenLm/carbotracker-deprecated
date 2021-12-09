@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { ProductsEntity } from '../../+state/products/products.models';
+import { ProductsEntity } from '../../+state/products/products-entity.model';
 import { Observable } from 'rxjs';
 import { tap } from 'rxjs/operators';
 import { ProductForm } from '../../forms/product-form';
