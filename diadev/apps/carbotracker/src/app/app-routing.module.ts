@@ -1,10 +1,11 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { MEALS_ROUTING_PATH } from '@diadev/meals';
 import { PRODUCTS_ROUTING_PATH } from '@diadev/products';
 
 enum AppPath {
   products = 'products',
-  currentMeal = 'current-meal',
+  meals = 'current-meal',
 }
 
 const routes: Routes = [
@@ -19,7 +20,7 @@ const routes: Routes = [
       import('@diadev/products').then((m) => m.ProductsModule),
   },
   {
-    path: AppPath.currentMeal,
+    path: AppPath.meals,
     loadChildren: () => import('@diadev/meals').then((m) => m.MealsModule),
   },
   {
@@ -34,6 +35,10 @@ const routes: Routes = [
     {
       provide: PRODUCTS_ROUTING_PATH,
       useValue: AppPath.products,
+    },
+    {
+      provide: MEALS_ROUTING_PATH,
+      useValue: AppPath.meals,
     },
   ],
   exports: [RouterModule],
