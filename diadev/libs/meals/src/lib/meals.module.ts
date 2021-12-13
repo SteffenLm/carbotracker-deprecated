@@ -10,6 +10,7 @@ import { CreateMealEntryComponent } from './components/create-meal-entry/create-
 import { EditMealEntryComponent } from './components/edit-meal-entry/edit-meal-entry.component';
 import { MealsMaterialModule } from './meals-material.module';
 import { ReactiveFormsModule } from '@angular/forms';
+import { MealsRoutingService } from './services/meals-routing.service';
 
 @NgModule({
   imports: [
@@ -26,5 +27,6 @@ import { ReactiveFormsModule } from '@angular/forms';
     CreateMealEntryComponent,
     EditMealEntryComponent,
   ],
+  providers: [MealsRoutingService],
 })
 export class MealsModule {}
