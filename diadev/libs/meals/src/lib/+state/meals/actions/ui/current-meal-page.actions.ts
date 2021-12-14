@@ -1,4 +1,4 @@
-import { createAction } from '@ngrx/store';
+import { createAction, props } from '@ngrx/store';
 
 export const createMealEntry = createAction(
   '[Current Meal Page] Create Meal Entry',
@@ -6,6 +6,7 @@ export const createMealEntry = createAction(
 
 export const selectMealEntry = createAction(
   '[Current Meal Page] Select Meal Entry',
+  props<{ mealEntryId: string }>(),
 );
 
 export const deletCurrentMeal = createAction(

@@ -12,4 +12,12 @@ export class MealsRoutingService {
   public navigateToCreatePage(): void {
     this.router.navigate([this.urlBasePath, 'create']);
   }
+
+  public navigateToCurrentMeal(): void {
+    this.router.navigate([this.urlBasePath]);
+  }
+
+  public navigateToMealEntryDetails(mealEntryId: string): void {
+    this.router.navigate([this.urlBasePath, mealEntryId]);
+  }
 }
