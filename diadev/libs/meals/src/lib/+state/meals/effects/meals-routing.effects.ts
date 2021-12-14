@@ -5,6 +5,7 @@ import { MealsRoutingService } from '../../../services/meals-routing.service';
 import {
   CreateMealEntryPageActions,
   CurrentMealPageActions,
+  EditMealEntryPageActions,
 } from '../actions/ui';
 
 @Injectable()
@@ -28,6 +29,9 @@ export class MealsRoutingEffects {
           CreateMealEntryPageActions.createMealEntry,
           CreateMealEntryPageActions.abortMealEntryCreation,
           CreateMealEntryPageActions.navigateBack,
+          EditMealEntryPageActions.updateMealEntry,
+          EditMealEntryPageActions.deleteMealEntry,
+          EditMealEntryPageActions.navigateBack,
         ),
         tap(() => this.mealsRoutingService.navigateToCurrentMeal()),
       );
