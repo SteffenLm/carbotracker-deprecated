@@ -1,7 +1,8 @@
-import { createReducer } from '@ngrx/store';
+import { createReducer, on } from '@ngrx/store';
 
 import { mealsEntityAdapter } from '../model/meals.entity-adapter';
 import { MealsState } from '../model/meals-state.model';
+import { CreateMealEntryPageActions } from '../actions/ui';
 
 export const initialState: MealsState = {
   currentMeal: {
@@ -13,4 +14,21 @@ export const initialState: MealsState = {
   error: null,
 };
 
-export const mealsReducer = createReducer(initialState);
+export const mealsReducer = createReducer(
+  initialState,
+  on(
+    CreateMealEntryPageActions.createMealEntry,
+    (state, { mealEntry }): MealsState => {
+      return {
+        ...state,
+        currentMeal: {
+          ...state.currentMeal,
+          mealEntries: mealsEntityAdapter.addOne(
+            mealEntry,
+            state.currentMeal.mealEntries,
+          ),
+        },
+      };
+    },
+  ),
+);

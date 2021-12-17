@@ -1,6 +1,13 @@
-<diadev-toolbar title="Create Meal Entry"></diadev-toolbar>
+<diadev-toolbar
+  (clickBackNavigation)="onNavigateBack()"
+  [enableBackNavigation]="true"
+  title="create meal entry"
+>
+  <button (click)="onClose()" mat-icon-button>
+    <mat-icon> close </mat-icon>
+  </button>
+</diadev-toolbar>
 <form
-  (ngSubmit)="onSubmit()"
   [formGroup]="this.mealEntryFormGroup"
   style="display: flex; flex-direction: column; padding: 1rem"
 >
@@ -32,15 +39,12 @@
   <div
     style="display: flex; flex-direction: row; justify-content: space-around"
   >
-    <button mat-button mat-dialog-close type="button">Abort</button>
-    <button
+    <diadev-fab-icon-button
       [disabled]="this.mealEntryFormGroup.invalid"
       mat-raised-button
-      mat-dialog-close
-      type="submit"
+      (click)="onSave()"
       color="primary"
-    >
-      Save
-    </button>
+      icon="save"
+    ></diadev-fab-icon-button>
   </div>
 </form>
