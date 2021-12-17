@@ -15,23 +15,33 @@ export const selectMealsError = createSelector(
   (state: MealsState) => state.error,
 );
 
-export const selectAllMeals = createSelector(
+export const selectCurrentMeal = createSelector(
   selectMealsState,
-  (state: MealsState) => selectMeals(state),
+  (state: MealsState) => state.currentMeal,
+);
+
+export const selectMealEntriesOfCurrentMeal = createSelector(
+  selectCurrentMeal,
+  (currentMeal) => currentMeal.mealEntries,
+);
+
+export const selectAllMeals = createSelector(
+  selectMealEntriesOfCurrentMeal,
+  (mealEntries) => selectMeals(mealEntries),
 );
 
 export const selectMealsEntities = createSelector(
-  selectMealsState,
-  (state: MealsState) => selectMealEntities(state),
+  selectMealEntriesOfCurrentMeal,
+  (mealEntries) => selectMealEntities(mealEntries),
 );
 
-export const selectSelectedId = createSelector(
-  selectMealsState,
-  (state: MealsState) => state.selectedId,
+export const selectIdOfSelectedMealEntry = createSelector(
+  selectCurrentMeal,
+  (currentMeal) => currentMeal.selectedMealEntry,
 );
 
 export const selectSelected = createSelector(
   selectMealsEntities,
-  selectSelectedId,
+  selectIdOfSelectedMealEntry,
   (entities, selectedId) => (selectedId ? entities[selectedId] : undefined),
 );
