@@ -8,7 +8,8 @@
     *ngFor="let mealEntry of this.currentMealEntries$ | async"
     (click)="onSelectMealEntry(mealEntry.id)"
   >
-    {{ mealEntry.name }}
+    {{ mealEntry.amountInGramm }}gr {{ mealEntry.name }},
+    {{ mealEntry.carbohydratesPer100Gram }}g Carbohydrates
   </mat-list-item>
 </mat-list>
 
