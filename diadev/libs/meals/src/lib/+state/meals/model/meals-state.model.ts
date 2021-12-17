@@ -1,5 +1,5 @@
 import { EntityState } from '@ngrx/entity';
-import { MealEntry } from '../meal-entry.models';
+import { MealEntry } from '../../../model/meal-entry.models';
 
 export const MEALS_FEATURE_KEY = 'meals';
 
