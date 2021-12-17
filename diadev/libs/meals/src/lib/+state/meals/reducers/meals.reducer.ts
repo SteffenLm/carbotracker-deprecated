@@ -5,7 +5,8 @@ import { MealsState } from '../model/meals-state.model';
 import {
   CreateMealEntryPageActions,
   CurrentMealPageActions,
-} from '../actions/ui';
+  LocalStorageApiActions,
+} from '../actions';
 
 export const initialState: MealsState = {
   currentMeal: {
@@ -32,6 +33,12 @@ export const mealsReducer = createReducer(
           ),
         },
       };
+    },
+  ),
+  on(
+    LocalStorageApiActions.loadProductStateFromLocalStorageSuccess,
+    (state, { mealsState }): MealsState => {
+      return mealsState;
     },
   ),
   on(CurrentMealPageActions.deletCurrentMeal, (state): MealsState => {
