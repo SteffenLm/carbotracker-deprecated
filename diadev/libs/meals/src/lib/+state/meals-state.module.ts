@@ -1,11 +1,13 @@
 import { NgModule } from '@angular/core';
-import { StoreModule } from '@ngrx/store';
+import { Store, StoreModule } from '@ngrx/store';
 import { EffectsModule } from '@ngrx/effects';
 import * as fromMeals from './meals/meals.reducer';
 import { MealsEffects } from './meals/meals.effects';
 import { MealsFacade } from './meals/meals.facade';
 import { MealsPersistenceEffects } from './meals/meals-persistence/meals-persistence.effects';
 import { MealsRoutingEffects } from './meals/effects/meals-routing.effects';
+import { SystemApiActions } from './meals/actions/api';
+import { MealsLocalStorageEffects } from './meals/effects/meals-local-storage.effects';
 
 @NgModule({
   imports: [
@@ -14,8 +16,13 @@ import { MealsRoutingEffects } from './meals/effects/meals-routing.effects';
       MealsEffects,
       MealsPersistenceEffects,
       MealsRoutingEffects,
+      MealsLocalStorageEffects,
     ]),
   ],
   providers: [MealsFacade],
 })
-export class MealsStateModule {}
+export class MealsStateModule {
+  constructor(store: Store) {
+    store.dispatch(SystemApiActions.initialize());
+  }
+}
