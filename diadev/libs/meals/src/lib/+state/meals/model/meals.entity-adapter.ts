@@ -1,8 +1,8 @@
-import { MealsEntity } from '../meals.models';
+import { MealEntry } from '../meal-entry.models';
 import { createEntityAdapter, EntityAdapter } from '@ngrx/entity';
 
-export const mealsEntityAdapter: EntityAdapter<MealsEntity> =
-  createEntityAdapter<MealsEntity>();
+export const mealsEntityAdapter: EntityAdapter<MealEntry> =
+  createEntityAdapter<MealEntry>();
 
 const { selectIds, selectEntities, selectAll, selectTotal } =
   mealsEntityAdapter.getSelectors();
