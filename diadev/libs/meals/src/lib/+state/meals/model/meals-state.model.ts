@@ -1,6 +1,7 @@
 import { EntityState } from '@ngrx/entity';
 import { MealsEntity } from '../meals.models';
-import { MEALS_FEATURE_KEY } from '../meals.reducer';
+
+export const MEALS_FEATURE_KEY = 'meals';
 
 export interface MealsState extends EntityState<MealsEntity> {
   selectedId: string | null;

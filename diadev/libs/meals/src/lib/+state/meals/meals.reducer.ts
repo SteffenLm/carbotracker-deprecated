@@ -3,8 +3,6 @@ import { createReducer } from '@ngrx/store';
 import { mealsEntityAdapter } from './model/meals.entity-adapter';
 import { MealsState } from './model/meals-state.model';
 
-export const MEALS_FEATURE_KEY = 'meals';
-
 export const initialState: MealsState = mealsEntityAdapter.getInitialState({
   selectedId: null,
   loaded: false,
