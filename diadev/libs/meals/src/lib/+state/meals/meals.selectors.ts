@@ -1,6 +1,7 @@
 import { createFeatureSelector, createSelector } from '@ngrx/store';
-import { selectMealEntities, selectMeals } from './meals.entity-adapter';
-import { MEALS_FEATURE_KEY, MealsState } from './meals.reducer';
+import { selectMealEntities, selectMeals } from './model/meals.entity-adapter';
+import { MEALS_FEATURE_KEY } from './meals.reducer';
+import { MealsState } from './model/meals-state.model';
 
 export const selectMealsState =
   createFeatureSelector<MealsState>(MEALS_FEATURE_KEY);

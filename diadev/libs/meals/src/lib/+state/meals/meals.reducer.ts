@@ -1,20 +1,9 @@
-import { EntityState } from '@ngrx/entity';
 import { createReducer } from '@ngrx/store';
 
-import { mealsEntityAdapter } from './meals.entity-adapter';
-import { MealsEntity } from './meals.models';
+import { mealsEntityAdapter } from './model/meals.entity-adapter';
+import { MealsState } from './model/meals-state.model';
 
 export const MEALS_FEATURE_KEY = 'meals';
-
-export interface MealsState extends EntityState<MealsEntity> {
-  selectedId: string | null;
-  loaded: boolean;
-  error: string | null;
-}
-
-export interface MealsPartialState {
-  readonly [MEALS_FEATURE_KEY]: MealsState;
-}
 
 export const initialState: MealsState = mealsEntityAdapter.getInitialState({
   selectedId: null,

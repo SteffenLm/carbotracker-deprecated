@@ -1,4 +1,4 @@
-import { MealsEntity } from './meals.models';
+import { MealsEntity } from '../meals.models';
 import { createEntityAdapter, EntityAdapter } from '@ngrx/entity';
 
 export const mealsEntityAdapter: EntityAdapter<MealsEntity> =

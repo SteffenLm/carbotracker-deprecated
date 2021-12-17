@@ -9,8 +9,8 @@ import {
   CreateMealEntryPageActions,
   EditMealEntryPageActions,
 } from '../actions/ui';
-import { MealsState } from '../meals.reducer';
 import { selectMealsState } from '../meals.selectors';
+import { MealsState } from '../model/meals-state.model';
 
 @Injectable()
 export class MealsLocalStorageEffects {

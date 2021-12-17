@@ -1,5 +1,5 @@
 import { createAction, props } from '@ngrx/store';
-import { MealsState } from '../../meals.reducer';
+import { MealsState } from '../../model/meals-state.model';
 
 export const saveProductStateToLocalStorageSuccess = createAction(
   '[Meals | Local Storage API] Save Meals State to LocalStorage Success',
