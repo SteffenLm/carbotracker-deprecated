@@ -1,16 +1,16 @@
-<diadev-toolbar [title]="''">
-  <button mat-icon-button>
+<diadev-toolbar [title]="'current meal'">
+  <button mat-icon-button (click)="onDelete()">
     <mat-icon>delete</mat-icon>
   </button>
 </diadev-toolbar>
 <mat-list>
-  <!-- <mat-list-item
-    *ngFor="let mealEntry of this.allMealEntries | async"
-    [routerLink]="mealEntry.id"
+  <mat-list-item
+    *ngFor="let mealEntry of this.currentMealEntries$ | async"
+    (click)="onSelectMealEntry(mealEntry.id)"
   >
     {{ mealEntry.name }}
-  </mat-list-item> -->
+  </mat-list-item>
 </mat-list>
 
-<diadev-fab-icon-button routerLink="create" color="primary" icon="add">
+<diadev-fab-icon-button (click)="onCreate()" color="primary" icon="add">
 </diadev-fab-icon-button>

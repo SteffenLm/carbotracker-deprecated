@@ -2,7 +2,10 @@ import { createReducer, on } from '@ngrx/store';
 
 import { mealsEntityAdapter } from '../model/meals.entity-adapter';
 import { MealsState } from '../model/meals-state.model';
-import { CreateMealEntryPageActions } from '../actions/ui';
+import {
+  CreateMealEntryPageActions,
+  CurrentMealPageActions,
+} from '../actions/ui';
 
 export const initialState: MealsState = {
   currentMeal: {
@@ -31,4 +34,15 @@ export const mealsReducer = createReducer(
       };
     },
   ),
+  on(CurrentMealPageActions.deletCurrentMeal, (state): MealsState => {
+    return {
+      ...state,
+      currentMeal: {
+        ...state.currentMeal,
+        mealEntries: mealsEntityAdapter.removeAll(
+          state.currentMeal.mealEntries,
+        ),
+      },
+    };
+  }),
 );

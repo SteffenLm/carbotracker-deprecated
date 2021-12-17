@@ -7,6 +7,7 @@ import { MealsLocalStorageService } from '../../../services/meals-local-storage.
 import { LocalStorageApiActions, SystemApiActions } from '../actions/api';
 import {
   CreateMealEntryPageActions,
+  CurrentMealPageActions,
   EditMealEntryPageActions,
 } from '../actions/ui';
 import { MealsState } from '../model/meals-state.model';
@@ -20,6 +21,7 @@ export class MealsLocalStorageEffects {
         CreateMealEntryPageActions.createMealEntry,
         EditMealEntryPageActions.deleteMealEntry,
         EditMealEntryPageActions.updateMealEntry,
+        CurrentMealPageActions.deletCurrentMeal,
       ),
       concatLatestFrom(() => this.selectMealsState()),
       map(([, mealsState]) => {
