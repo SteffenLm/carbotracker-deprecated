@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { Store, StoreModule } from '@ngrx/store';
 import { EffectsModule } from '@ngrx/effects';
-import * as fromMeals from './meals/meals.reducer';
+import * as fromMeals from './meals/reducers/meals.reducer';
 import { MealsRoutingEffects } from './meals/effects/meals-routing.effects';
 import { SystemApiActions } from './meals/actions/api';
 import { MealsLocalStorageEffects } from './meals/effects/meals-local-storage.effects';

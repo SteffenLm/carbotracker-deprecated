@@ -1,7 +1,7 @@
 import { createReducer } from '@ngrx/store';
 
-import { mealsEntityAdapter } from './model/meals.entity-adapter';
-import { MealsState } from './model/meals-state.model';
+import { mealsEntityAdapter } from '../model/meals.entity-adapter';
+import { MealsState } from '../model/meals-state.model';
 
 export const initialState: MealsState = mealsEntityAdapter.getInitialState({
   selectedId: null,
