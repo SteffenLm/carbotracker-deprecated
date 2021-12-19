@@ -1,19 +1,17 @@
 import { TestBed } from '@angular/core/testing';
 import { provideMockActions } from '@ngrx/effects/testing';
+import { Action } from '@ngrx/store';
 import { Observable } from 'rxjs';
 
 import { MealsRoutingEffects } from './meals-routing.effects';
 
 describe('MealsRoutingEffects', () => {
-  let actions$: Observable<any>;
+  let actions$: Observable<Action>;
   let effects: MealsRoutingEffects;
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      providers: [
-        MealsRoutingEffects,
-        provideMockActions(() => actions$)
-      ]
+      providers: [MealsRoutingEffects, provideMockActions(() => actions$)],
     });
 
     effects = TestBed.inject(MealsRoutingEffects);

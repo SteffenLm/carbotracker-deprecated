@@ -1,19 +1,17 @@
 import { TestBed } from '@angular/core/testing';
 import { provideMockActions } from '@ngrx/effects/testing';
+import { Action } from '@ngrx/store';
 import { Observable } from 'rxjs';
 
 import { MealsLocalStorageEffects } from './meals-local-storage.effects';
 
 describe('MealsLocalStorageEffects', () => {
-  let actions$: Observable<any>;
+  let actions$: Observable<Action>;
   let effects: MealsLocalStorageEffects;
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      providers: [
-        MealsLocalStorageEffects,
-        provideMockActions(() => actions$)
-      ]
+      providers: [MealsLocalStorageEffects, provideMockActions(() => actions$)],
     });
 
     effects = TestBed.inject(MealsLocalStorageEffects);
