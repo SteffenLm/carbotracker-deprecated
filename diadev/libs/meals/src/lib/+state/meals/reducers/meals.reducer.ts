@@ -92,4 +92,18 @@ export const mealsReducer = createReducer(
       },
     };
   }),
+  on(
+    EditMealEntryPageActions.deleteMealEntry,
+    (state, { mealEntryId }): MealsState => ({
+      ...state,
+      currentMeal: {
+        ...state.currentMeal,
+        selectedMealEntry: null,
+        mealEntries: mealsEntityAdapter.removeOne(
+          mealEntryId,
+          state.currentMeal.mealEntries,
+        ),
+      },
+    }),
+  ),
 );
