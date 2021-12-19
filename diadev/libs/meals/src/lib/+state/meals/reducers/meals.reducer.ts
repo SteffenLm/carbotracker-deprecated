@@ -38,7 +38,15 @@ export const mealsReducer = createReducer(
   on(
     LocalStorageApiActions.loadProductStateFromLocalStorageSuccess,
     (state, { mealsState }): MealsState => {
-      return mealsState;
+      return {
+        ...mealsState,
+        loaded: true,
+        error: null,
+        currentMeal: {
+          ...mealsState.currentMeal,
+          error: null,
+        },
+      };
     },
   ),
   on(CurrentMealPageActions.deletCurrentMeal, (state): MealsState => {
