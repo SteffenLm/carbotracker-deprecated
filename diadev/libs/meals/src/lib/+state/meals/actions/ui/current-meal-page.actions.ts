@@ -9,6 +9,6 @@ export const selectMealEntry = createAction(
   props<{ mealEntryId: string }>(),
 );
 
-export const deletCurrentMeal = createAction(
+export const deleteCurrentMeal = createAction(
   '[Current Meal Page] Delete Current Meal',
 );

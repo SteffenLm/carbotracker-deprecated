@@ -21,7 +21,7 @@ export class MealsLocalStorageEffects {
         CreateMealEntryPageActions.createMealEntry,
         EditMealEntryPageActions.deleteMealEntry,
         EditMealEntryPageActions.updateMealEntry,
-        CurrentMealPageActions.deletCurrentMeal,
+        CurrentMealPageActions.deleteCurrentMeal,
       ),
       concatLatestFrom(() => this.selectMealsState()),
       map(([, mealsState]) => {

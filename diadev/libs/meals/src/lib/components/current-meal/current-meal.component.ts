@@ -27,6 +27,6 @@ export class CurrentMealComponent {
   }
 
   public onDelete(): void {
-    this.store.dispatch(CurrentMealPageActions.deletCurrentMeal());
+    this.store.dispatch(CurrentMealPageActions.deleteCurrentMeal());
   }
 }

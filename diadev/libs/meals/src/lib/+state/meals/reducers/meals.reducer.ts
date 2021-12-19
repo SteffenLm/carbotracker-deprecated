@@ -52,7 +52,7 @@ export const mealsReducer = createReducer(
       };
     },
   ),
-  on(CurrentMealPageActions.deletCurrentMeal, (state): MealsState => {
+  on(CurrentMealPageActions.deleteCurrentMeal, (state): MealsState => {
     return {
       ...state,
       currentMeal: {
