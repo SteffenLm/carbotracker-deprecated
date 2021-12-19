@@ -4,7 +4,7 @@ import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
 import { tap } from 'rxjs/operators';
 import { EditMealEntryPageActions } from '../../+state/meals/actions/ui';
-import { selectSelected } from '../../+state/meals/selectors/meals.selectors';
+import { selectSelectedMealEntry } from '../../+state/meals/selectors/meals.selectors';
 import { MealEntry } from '../../model/meal-entry.models';
 
 @Component({
@@ -14,7 +14,7 @@ import { MealEntry } from '../../model/meal-entry.models';
 })
 export class EditMealEntryComponent {
   public selectedMealEntry$: Observable<MealEntry> = this.store
-    .select(selectSelected)
+    .select(selectSelectedMealEntry)
     .pipe(
       tap((v) =>
         this.mealEntryFormGroup.setValue({

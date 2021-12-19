@@ -7,6 +7,7 @@ import {
   CurrentMealPageActions,
   LocalStorageApiActions,
 } from '../actions';
+import { act } from '@ngrx/effects';
 
 export const initialState: MealsState = {
   currentMeal: {
@@ -60,4 +61,14 @@ export const mealsReducer = createReducer(
       },
     };
   }),
+  on(
+    CurrentMealPageActions.selectMealEntry,
+    (state, { mealEntryId }): MealsState => ({
+      ...state,
+      currentMeal: {
+        ...state.currentMeal,
+        selectedMealEntry: mealEntryId,
+      },
+    }),
+  ),
 );

@@ -41,7 +41,7 @@ export const selectIdOfSelectedMealEntry = createSelector(
   (currentMeal) => currentMeal.selectedMealEntry,
 );
 
-export const selectSelected = createSelector(
+export const selectSelectedMealEntry = createSelector(
   selectMealsEntities,
   selectIdOfSelectedMealEntry,
   (entities, selectedId) =>
