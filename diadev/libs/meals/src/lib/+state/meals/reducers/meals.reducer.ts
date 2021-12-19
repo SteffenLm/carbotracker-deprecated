@@ -5,9 +5,11 @@ import { MealsState } from '../model/meals-state.model';
 import {
   CreateMealEntryPageActions,
   CurrentMealPageActions,
+  EditMealEntryPageActions,
   LocalStorageApiActions,
 } from '../actions';
-import { act } from '@ngrx/effects';
+import { Update } from '@ngrx/entity';
+import { MealEntry } from '../../../model/meal-entry.models';
 
 export const initialState: MealsState = {
   currentMeal: {
@@ -71,4 +73,23 @@ export const mealsReducer = createReducer(
       },
     }),
   ),
+  on(EditMealEntryPageActions.updateMealEntry, (state, action): MealsState => {
+    const updatedMealEntry: Update<MealEntry> = {
+      id: action.mealEntryId,
+      changes: {
+        amountInGramm: action.amount,
+      },
+    };
+    return {
+      ...state,
+      currentMeal: {
+        ...state.currentMeal,
+        selectedMealEntry: null,
+        mealEntries: mealsEntityAdapter.updateOne(
+          updatedMealEntry,
+          state.currentMeal.mealEntries,
+        ),
+      },
+    };
+  }),
 );

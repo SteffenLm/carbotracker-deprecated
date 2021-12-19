@@ -25,9 +25,10 @@
   </mat-form-field>
 </form>
 <diadev-fab-icon-button
+  *ngIf="selectedMealEntry$ | async as selectedMealEntry"
   [disabled]="this.mealEntryFormGroup.invalid"
   mat-raised-button
-  (click)="onSave()"
+  (click)="onSave(selectedMealEntry.id)"
   color="primary"
   icon="save"
 ></diadev-fab-icon-button>

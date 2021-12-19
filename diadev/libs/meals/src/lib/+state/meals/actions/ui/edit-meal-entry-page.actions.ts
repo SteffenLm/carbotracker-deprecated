@@ -11,4 +11,5 @@ export const deleteMealEntry = createAction(
 
 export const updateMealEntry = createAction(
   '[Edit Meal Entry Page] Update Meal Entry',
+  props<{ mealEntryId: string; amount: number }>(),
 );

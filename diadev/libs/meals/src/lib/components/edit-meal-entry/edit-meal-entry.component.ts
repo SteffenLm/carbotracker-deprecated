@@ -42,8 +42,15 @@ export class EditMealEntryComponent {
     );
   }
 
-  public onSave(): void {
-    this.store.dispatch(EditMealEntryPageActions.updateMealEntry());
+  public onSave(mealEntryId: string): void {
+    const newAmount = this.mealEntryFormGroup.controls.amount.value as string;
+
+    this.store.dispatch(
+      EditMealEntryPageActions.updateMealEntry({
+        mealEntryId,
+        amount: +newAmount,
+      }),
+    );
   }
 
   private createMealEntryFormGroup(): FormGroup {
