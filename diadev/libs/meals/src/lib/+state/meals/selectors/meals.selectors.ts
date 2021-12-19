@@ -1,4 +1,5 @@
 import { createFeatureSelector, createSelector } from '@ngrx/store';
+import { CalculatedMealEntry } from '../../../model/calculated-meal-entry.model';
 import { getEmptyMealEntry } from '../../../model/meal-entry.models';
 import { MealsState, MEALS_FEATURE_KEY } from '../model/meals-state.model';
 import { selectMeals, selectMealEntities } from '../model/meals.entity-adapter';
@@ -29,6 +30,16 @@ export const selectMealEntriesOfCurrentMeal = createSelector(
 export const selectAllMeals = createSelector(
   selectMealEntriesOfCurrentMeal,
   (mealEntries) => selectMeals(mealEntries),
+);
+
+export const selectAllCalculatedMeals = createSelector(
+  selectAllMeals,
+  (mealEntries): CalculatedMealEntry[] =>
+    mealEntries.map((mealEntry) => ({
+      ...mealEntry,
+      amountOfCarbohydratesInGramm:
+        (mealEntry.amountInGramm * mealEntry.carbohydratesPer100Gram) / 100,
+    })),
 );
 
 export const selectMealsEntities = createSelector(

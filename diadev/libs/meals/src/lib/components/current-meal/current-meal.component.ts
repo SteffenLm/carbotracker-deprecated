@@ -2,8 +2,8 @@ import { Component } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
 import { CurrentMealPageActions } from '../../+state/meals/actions/ui';
-import { selectAllMeals } from '../../+state/meals/selectors/meals.selectors';
-import { MealEntry } from '../../model/meal-entry.models';
+import { selectAllCalculatedMeals } from '../../+state/meals/selectors/meals.selectors';
+import { CalculatedMealEntry } from '../../model/calculated-meal-entry.model';
 
 @Component({
   selector: 'diadev-current-meal',
@@ -11,8 +11,8 @@ import { MealEntry } from '../../model/meal-entry.models';
   styleUrls: ['./current-meal.component.scss'],
 })
 export class CurrentMealComponent {
-  public currentMealEntries$: Observable<MealEntry[]> =
-    this.store.select(selectAllMeals);
+  public currentMealEntries$: Observable<CalculatedMealEntry[]> =
+    this.store.select(selectAllCalculatedMeals);
 
   constructor(private readonly store: Store) {}
 
