@@ -2,7 +2,9 @@ import { Inject, Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { PRODUCTS_ROUTING_PATH } from '../model/products-routing.model';
 
-@Injectable()
+@Injectable({
+  providedIn: 'root',
+})
 export class ProductsRoutingService {
   constructor(
     @Inject(PRODUCTS_ROUTING_PATH) private readonly urlBasePath: string,

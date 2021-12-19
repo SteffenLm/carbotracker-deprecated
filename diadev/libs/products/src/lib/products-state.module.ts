@@ -10,9 +10,11 @@ import {
 } from './+state/products/effects';
 import { PRODUCTS_FEATURE_KEY } from './+state/products/model/products-state.model';
 import { productsReducer } from './+state/products/reducers/products.reducer';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
 
 @NgModule({
   imports: [
+    MatSnackBarModule,
     StoreModule.forFeature(PRODUCTS_FEATURE_KEY, productsReducer),
     EffectsModule.forFeature([
       ProductsLocalStorageEffects,
