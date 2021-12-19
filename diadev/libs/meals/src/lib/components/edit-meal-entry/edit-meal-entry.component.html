@@ -1,1 +1,33 @@
-<p>edit-meal-entry works!</p>
+<diadev-toolbar
+  (clickBackNavigation)="onNavigateBack()"
+  [enableBackNavigation]="true"
+  title="edit meal entry"
+>
+  <button
+    *ngIf="selectedMealEntry$ | async as selectedMealEntry"
+    (click)="onDelete(selectedMealEntry.id)"
+    mat-icon-button
+  >
+    <mat-icon> delete </mat-icon>
+  </button>
+</diadev-toolbar>
+<form
+  [formGroup]="this.mealEntryFormGroup"
+  style="display: flex; flex-direction: column; padding: 1rem"
+>
+  <mat-form-field>
+    <mat-label>Product name</mat-label>
+    <input type="text" formControlName="product" matInput />
+  </mat-form-field>
+  <mat-form-field>
+    <mat-label>Amount</mat-label>
+    <input type="number" formControlName="amount" matInput />
+  </mat-form-field>
+</form>
+<diadev-fab-icon-button
+  [disabled]="this.mealEntryFormGroup.invalid"
+  mat-raised-button
+  (click)="onSave()"
+  color="primary"
+  icon="save"
+></diadev-fab-icon-button>

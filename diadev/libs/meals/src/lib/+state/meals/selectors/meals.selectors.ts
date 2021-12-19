@@ -1,4 +1,5 @@
 import { createFeatureSelector, createSelector } from '@ngrx/store';
+import { getEmptyMealEntry } from '../../../model/meal-entry.models';
 import { MealsState, MEALS_FEATURE_KEY } from '../model/meals-state.model';
 import { selectMeals, selectMealEntities } from '../model/meals.entity-adapter';
 
@@ -43,5 +44,8 @@ export const selectIdOfSelectedMealEntry = createSelector(
 export const selectSelected = createSelector(
   selectMealsEntities,
   selectIdOfSelectedMealEntry,
-  (entities, selectedId) => (selectedId ? entities[selectedId] : undefined),
+  (entities, selectedId) =>
+    selectedId
+      ? entities[selectedId] ?? getEmptyMealEntry()
+      : getEmptyMealEntry(),
 );
