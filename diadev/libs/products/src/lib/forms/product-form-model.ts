@@ -1,6 +1,7 @@
 import {
   FormBuilder,
   FormControl,
+  FormControlStatus,
   FormGroup,
   Validators,
 } from '@angular/forms';
@@ -28,7 +29,7 @@ export class ProductFormModel {
     );
   }
 
-  public getStatusChanges(): Observable<void> {
+  public getStatusChanges(): Observable<FormControlStatus> {
     return this.productFormGroup.statusChanges;
   }
 
