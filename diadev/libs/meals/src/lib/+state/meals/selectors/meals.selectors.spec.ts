@@ -3,7 +3,6 @@ import {
   getAppleCalculatedMealEntry,
   getPastaCalculatedMealEntry,
 } from '../../../model/calculated-meal-entry.model';
-import { getPastaMealEntry } from '../../../model/meal-entry.models';
 import { MealsSelectors } from './index';
 
 describe('Meals Selectors', () => {
