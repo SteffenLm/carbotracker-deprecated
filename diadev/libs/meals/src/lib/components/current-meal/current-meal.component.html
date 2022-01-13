@@ -1,4 +1,8 @@
-<diadev-toolbar [title]="'current meal'">
+<diadev-toolbar
+  title="Total: {{
+    totalCarbohydratsOfCurrentMeal$ | async | number: '1.0-1'
+  }} gr"
+>
   <button mat-icon-button (click)="onDelete()">
     <mat-icon>delete</mat-icon>
   </button>
@@ -8,8 +12,9 @@
     *ngFor="let mealEntry of this.currentMealEntries$ | async"
     (click)="onSelectMealEntry(mealEntry.id)"
   >
-    {{ mealEntry.amountInGramm }}gr {{ mealEntry.name }},
-    {{ mealEntry.amountOfCarbohydratesInGramm }}g Carbohydrates
+    {{ mealEntry.amountInGramm | number: '1.0-1' }}gr {{ mealEntry.name }},
+    {{ mealEntry.amountOfCarbohydratesInGramm | number: '1.0-1' }}g
+    Carbohydrates
   </mat-list-item>
 </mat-list>
 
