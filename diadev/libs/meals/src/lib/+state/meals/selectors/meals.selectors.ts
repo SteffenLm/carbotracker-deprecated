@@ -60,3 +60,11 @@ export const selectSelectedMealEntry = createSelector(
       ? entities[selectedId] ?? getEmptyMealEntry()
       : getEmptyMealEntry(),
 );
+
+export const selectTotalCarbohydratesOfCurrenMeal = createSelector(
+  selectAllCalculatedMeals,
+  (mealEntries): number =>
+    mealEntries
+      .map((mealEntry) => mealEntry.amountOfCarbohydratesInGramm)
+      .reduce((previousValue, currentValue) => previousValue + currentValue, 0),
+);
