@@ -31,6 +31,7 @@ describe('MealsLocalStorageEffects', () => {
     f: CreateMealEntryPageActions.createMealEntry({
       mealEntry: getPastaMealEntry(),
     }),
+    g: LocalStorageApiActions.saveProductStateToLocalStorageFailure(),
   });
 
   beforeEach(() => {
@@ -121,6 +122,19 @@ describe('MealsLocalStorageEffects', () => {
           });
         })();
       });
+      it(
+        'should dispatch a save to local storage error event if local storage api fails',
+        marbles((m) => {
+          saveMock.mockImplementation(() => {
+            throw new Error();
+          });
+          actions$ = m.cold('-f', getMarbleValues());
+          const expectedActions$ = m.cold('-g', getMarbleValues());
+          m.expect(effects.saveToLocalStorage$).toBeObservable(
+            expectedActions$ as unknown as never,
+          );
+        }),
+      );
     });
   });
 });
