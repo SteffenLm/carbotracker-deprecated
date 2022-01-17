@@ -1,6 +1,5 @@
 import {
   getAppleMealEntry,
-  getEmptyMealEntry,
   getPastaMealEntry,
   MealEntry,
 } from './meal-entry.models';
@@ -17,9 +16,4 @@ export const getPastaCalculatedMealEntry = (): CalculatedMealEntry => ({
 export const getAppleCalculatedMealEntry = (): CalculatedMealEntry => ({
   ...getAppleMealEntry(),
   amountOfCarbohydratesInGramm: 18,
-});
-
-export const getEmptyCalculatedMealEntry = (): CalculatedMealEntry => ({
-  ...getEmptyMealEntry(),
-  amountOfCarbohydratesInGramm: 0,
 });
