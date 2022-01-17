@@ -1,4 +1,4 @@
-import { Dictionary, EntityState } from '@ngrx/entity';
+import { Dictionary } from '@ngrx/entity';
 import {
   CalculatedMealEntry,
   getAppleCalculatedMealEntry,
@@ -9,7 +9,7 @@ import {
   getPastaMealEntry,
   MealEntry,
 } from '../../../model/meal-entry.models';
-import { CurrentMeal, MealsState } from '../model/meals-state.model';
+import { CurrentMeal } from '../model/meals-state.model';
 import { CurrentMealSelectors } from './index';
 
 describe('Meals Selectors', () => {
@@ -93,12 +93,12 @@ describe('Meals Selectors', () => {
   });
   describe('selectIdOfSelectedMealEntry', () => {
     it('should return the value of the selectedMealEntry proeprty', () => {
-      const givenCurrentMeal: Pick<CurrentMeal, 'selectedMealEntry'> = {
-        selectedMealEntry: 'ID',
+      const givenCurrentMeal: Pick<CurrentMeal, 'selectedMealEntryId'> = {
+        selectedMealEntryId: 'ID',
       };
 
       const resultId =
-        CurrentMealSelectors.selectIdOfSelectedMealEntry.projector(
+        CurrentMealSelectors.selectSelectedMealEntryId.projector(
           givenCurrentMeal,
         );
 

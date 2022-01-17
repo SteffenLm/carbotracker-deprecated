@@ -8,6 +8,7 @@
     "start": "nx serve",
     "build": "nx build",
     "test": "nx test",
+    "test:all": "nx run-many --target=test --all=true",
     "ci:lint": "nx affected --target=lint --base=origin/main",
     "ci:test": "nx affected --target=test --base=origin/main",
     "ci:e2e": "nx affected --target=e2e --base=origin/main"

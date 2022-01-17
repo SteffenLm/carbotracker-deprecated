@@ -15,7 +15,7 @@ export const initialState: MealsState = {
   currentMeal: {
     mealEntries: mealsEntityAdapter.getInitialState(),
     error: null,
-    selectedMealEntry: null,
+    selectedMealEntryId: null,
   },
   loaded: false,
   error: null,
@@ -69,7 +69,7 @@ export const mealsReducer = createReducer(
       ...state,
       currentMeal: {
         ...state.currentMeal,
-        selectedMealEntry: mealEntryId,
+        selectedMealEntryId: mealEntryId,
       },
     }),
   ),
@@ -84,7 +84,7 @@ export const mealsReducer = createReducer(
       ...state,
       currentMeal: {
         ...state.currentMeal,
-        selectedMealEntry: null,
+        selectedMealEntryId: null,
         mealEntries: mealsEntityAdapter.updateOne(
           updatedMealEntry,
           state.currentMeal.mealEntries,
@@ -98,7 +98,7 @@ export const mealsReducer = createReducer(
       ...state,
       currentMeal: {
         ...state.currentMeal,
-        selectedMealEntry: null,
+        selectedMealEntryId: null,
         mealEntries: mealsEntityAdapter.removeOne(
           mealEntryId,
           state.currentMeal.mealEntries,

@@ -5,7 +5,7 @@ export const MEALS_FEATURE_KEY = 'meals';
 
 export interface CurrentMeal {
   mealEntries: EntityState<MealEntry>;
-  selectedMealEntry: string | null;
+  selectedMealEntryId: string | null;
   error: string | null;
 }
 
@@ -28,7 +28,7 @@ export const getEmptyMealsState = (): MealsState => ({
       ids: [],
       entities: {},
     },
-    selectedMealEntry: null,
+    selectedMealEntryId: null,
   },
 });
 
@@ -43,6 +43,6 @@ export const getPastaSampleMealsState = (): MealsState => ({
         [getPastaMealEntry().id]: getPastaMealEntry(),
       },
     },
-    selectedMealEntry: getPastaMealEntry().id,
+    selectedMealEntryId: getPastaMealEntry().id,
   },
 });

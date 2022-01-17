@@ -11,8 +11,8 @@ import { MealsLocalStorageEffects } from './meals-local-storage.effects';
 import { MealsState } from '../model/meals-state.model';
 import { CreateMealEntryPageActions } from '../actions/ui';
 import { getPastaMealEntry } from '../../../model/meal-entry.models';
-import { selectMealsState } from '../selectors/current-meal.selectors';
 import { take } from 'rxjs/operators';
+import { selectMealsState } from '../selectors/meals-state.selectors';
 
 describe('MealsLocalStorageEffects', () => {
   let actions$: Observable<Action>;

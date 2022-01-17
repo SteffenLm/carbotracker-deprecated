@@ -59,8 +59,8 @@ describe('MealsReducer', () => {
         expect(newState.currentMeal.error).toBeNull();
       });
       it('should not touch the selectedMealEntry', () => {
-        expect(newState.currentMeal.selectedMealEntry).toEqual(
-          getPastaSampleMealsState().currentMeal.selectedMealEntry,
+        expect(newState.currentMeal.selectedMealEntryId).toEqual(
+          getPastaSampleMealsState().currentMeal.selectedMealEntryId,
         );
       });
       it('should set state errors to null', () => {
@@ -97,7 +97,7 @@ describe('MealsReducer', () => {
         );
       });
       it('should set the selectedMealEntry property', () => {
-        expect(newState.currentMeal.selectedMealEntry).toEqual(
+        expect(newState.currentMeal.selectedMealEntryId).toEqual(
           getPastaMealEntry().id,
         );
       });
@@ -117,7 +117,7 @@ describe('MealsReducer', () => {
         );
       });
       it('should set selected meal entry to null', () => {
-        expect(newState.currentMeal.selectedMealEntry).toBeNull();
+        expect(newState.currentMeal.selectedMealEntryId).toBeNull();
       });
       it('should update the amount of the pasta meal entry', () => {
         expect(
@@ -142,7 +142,7 @@ describe('MealsReducer', () => {
         expect(newState.currentMeal.mealEntries.entities).toEqual({});
       });
       it('should set selected meal entry to null', () => {
-        expect(newState.currentMeal.selectedMealEntry).toBeNull();
+        expect(newState.currentMeal.selectedMealEntryId).toBeNull();
       });
     });
   });
