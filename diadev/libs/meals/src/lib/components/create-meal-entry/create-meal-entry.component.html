@@ -1,0 +1,50 @@
+<diadev-toolbar
+  (clickBackNavigation)="onNavigateBack()"
+  [enableBackNavigation]="true"
+  title="create meal entry"
+>
+  <button (click)="onClose()" mat-icon-button>
+    <mat-icon> close </mat-icon>
+  </button>
+</diadev-toolbar>
+<form
+  [formGroup]="this.mealEntryFormGroup"
+  style="display: flex; flex-direction: column; padding: 1rem"
+>
+  <mat-form-field>
+    <mat-label>Product name</mat-label>
+    <input
+      type="text"
+      formControlName="product"
+      matInput
+      placeholder="Pick a Product"
+      [matAutocomplete]="auto"
+    />
+    <mat-autocomplete
+      #auto="matAutocomplete"
+      [displayWith]="displaySelectedProduct"
+    >
+      <mat-option
+        *ngFor="let product of filteredProducts | async"
+        [value]="product"
+      >
+        {{ product.name }}
+      </mat-option>
+    </mat-autocomplete>
+  </mat-form-field>
+  <mat-form-field>
+    <mat-label>Amount</mat-label>
+    <input type="number" formControlName="amount" matInput />
+  </mat-form-field>
+  <div
+    style="display: flex; flex-direction: row; justify-content: space-around"
+  >
+    <diadev-fab-icon-button
+      [disabled]="this.mealEntryFormGroup.invalid"
+      mat-raised-button
+      (click)="onSave()"
+      color="primary"
+      icon="save"
+    ></diadev-fab-icon-button>
+  </div>
+</form>

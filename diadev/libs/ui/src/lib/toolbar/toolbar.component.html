@@ -1,8 +1,8 @@
 <mat-toolbar>
   <mat-icon
+    (click)="onClickBackNavigation()"
     style="margin-right: 0.5rem; cursor: pointer"
     *ngIf="enableBackNavigation"
-    routerLink="../"
   >
     chevron_left
   </mat-icon>

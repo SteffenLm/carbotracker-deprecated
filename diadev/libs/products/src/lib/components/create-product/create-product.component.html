@@ -1,10 +1,13 @@
-<diadev-toolbar [enableBackNavigation]="true" title="create product">
-  <button routerLink="../" mat-icon-button>
+<diadev-toolbar
+  (clickBackNavigation)="onClickBackNavigation()"
+  [enableBackNavigation]="true"
+  title="create product"
+>
+  <button (click)="onClose()" mat-icon-button>
     <mat-icon> close </mat-icon>
   </button>
 </diadev-toolbar>
 <form
-  (ngSubmit)="onSubmit()"
   [formGroup]="this.productForm.getAsFormGroup()"
   style="display: flex; flex-direction: column; padding: 1rem"
 >
@@ -22,7 +25,7 @@
     <diadev-fab-icon-button
       [disabled]="(isProductFormValid | async) === false"
       mat-raised-button
-      (click)="onSubmit()"
+      (click)="onSave()"
       color="primary"
       icon="save"
     ></diadev-fab-icon-button>

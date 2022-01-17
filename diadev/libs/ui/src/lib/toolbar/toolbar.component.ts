@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 
 @Component({
   selector: 'diadev-toolbar',
@@ -8,4 +8,10 @@ import { Component, Input } from '@angular/core';
 export class ToolbarComponent {
   @Input() enableBackNavigation = false;
   @Input() title = '';
+
+  @Output() clickBackNavigation = new EventEmitter();
+
+  public onClickBackNavigation() {
+    this.clickBackNavigation.next();
+  }
 }

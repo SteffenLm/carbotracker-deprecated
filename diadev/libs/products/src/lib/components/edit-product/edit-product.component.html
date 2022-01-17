@@ -1,4 +1,8 @@
-<diadev-toolbar [enableBackNavigation]="true" title="edit product">
+<diadev-toolbar
+  [enableBackNavigation]="true"
+  (clickBackNavigation)="onClickBackNavigation()"
+  title="edit product"
+>
   <button
     *ngIf="selectedProduct | async as selectedProduct"
     (click)="onDeleteProduct(selectedProduct.id)"
@@ -37,8 +41,8 @@
 <ng-template #notfound>
   <div style="margin: 1rem">
     <div>This product does not exist anymore.</div>
-    <button mat-raised-button color="primary" routerLink="../">
-      <mat-icon>chevron_left</mat-icon>GO BACK
+    <button mat-raised-button color="primary" (click)="onGoBack()">
+      <mat-icon>chevron_left</mat-icon>Go to Products
     </button>
   </div>
 </ng-template>

@@ -14,10 +14,10 @@ export class NavigationComponent {
       path: '/products',
       text: 'products',
     },
-    // {
-    //   path: '/current-meal',
-    //   text: 'current meal',
-    // },
+    {
+      path: '/current-meal',
+      text: 'current meal',
+    },
     // {
     //   path: '/life-events',
     //   text: 'life events',

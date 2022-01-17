@@ -8,6 +8,7 @@ import { AppStateModule } from './app-state.module';
 
 import { RootComponent } from './components/root/root.component';
 import { NavigationComponent } from './components/navigation/navigation.component';
+import { ProductsStateModule } from '@diadev/products';
 
 @NgModule({
   declarations: [RootComponent, NavigationComponent],
@@ -17,6 +18,7 @@ import { NavigationComponent } from './components/navigation/navigation.componen
     AppMaterialModule,
     AppRoutingModule,
     AppStateModule,
+    ProductsStateModule,
   ],
   providers: [],
   bootstrap: [RootComponent],
