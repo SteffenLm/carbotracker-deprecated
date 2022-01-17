@@ -4,7 +4,7 @@ import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
 import { tap } from 'rxjs/operators';
 import { EditMealEntryPageActions } from '../../+state/meals/actions/ui';
-import { selectSelectedMealEntry } from '../../+state/meals/selectors/meals.selectors';
+import { selectSelectedMealEntry } from '../../+state/meals/selectors/current-meal.selectors';
 import { MealEntry } from '../../model/meal-entry.models';
 
 @Component({

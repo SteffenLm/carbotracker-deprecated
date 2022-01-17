@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
 import { CurrentMealPageActions } from '../../+state/meals/actions/ui';
-import { MealsSelectors } from '../../+state/meals/selectors';
+import { CurrentMealSelectors } from '../../+state/meals/selectors';
 import { CalculatedMealEntry } from '../../model/calculated-meal-entry.model';
 
 @Component({
@@ -12,9 +12,11 @@ import { CalculatedMealEntry } from '../../model/calculated-meal-entry.model';
 })
 export class CurrentMealComponent {
   public totalCarbohydratsOfCurrentMeal$: Observable<number> =
-    this.store.select(MealsSelectors.selectTotalCarbohydratesOfCurrenMeal);
+    this.store.select(
+      CurrentMealSelectors.selectTotalCarbohydratesOfCurrenMeal,
+    );
   public currentMealEntries$: Observable<CalculatedMealEntry[]> =
-    this.store.select(MealsSelectors.selectAllCalculatedMeals);
+    this.store.select(CurrentMealSelectors.selectAllCalculatedMeals);
 
   constructor(private readonly store: Store) {}
 

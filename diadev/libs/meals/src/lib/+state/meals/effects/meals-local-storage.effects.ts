@@ -11,7 +11,7 @@ import {
   EditMealEntryPageActions,
 } from '../actions/ui';
 import { MealsState } from '../model/meals-state.model';
-import { selectMealsState } from '../selectors/meals.selectors';
+import { selectMealsState } from '../selectors/current-meal.selectors';
 
 @Injectable()
 export class MealsLocalStorageEffects {
