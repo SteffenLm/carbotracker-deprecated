@@ -9,35 +9,70 @@ import {
   getPastaMealEntry,
   MealEntry,
 } from '../../../model/meal-entry.models';
-import { CurrentMeal } from '../model/meals-state.model';
-import { CurrentMealSelectors } from './index';
+import {
+  CurrentMeal,
+  getPastaSampleMealsState,
+} from '../model/meals-state.model';
+import {
+  selectAllCalculatedMeals,
+  selectAllMeals,
+  selectMealEntries,
+  selectMealsEntities,
+  selectSelectedMealEntry,
+  selectSelectedMealEntryId,
+  selectTotalCarbohydratesOfCurrenMeal,
+} from './current-meal.selectors';
 
-describe('Meals Selectors', () => {
-  describe('selectTotalCarbohydratesOfCurrenMeal', () => {
-    describe('when no meal entries exist', () => {
-      it('should return 0', () => {
-        const givenMealEntries: CalculatedMealEntry[] = [];
-        const totalNumberOfCarbohydrates =
-          CurrentMealSelectors.selectTotalCarbohydratesOfCurrenMeal.projector(
-            givenMealEntries,
-          );
-        expect(totalNumberOfCarbohydrates).toEqual(0);
-      });
-    });
+describe('CurrentMealSelectors', () => {
+  describe('selectMealEntries', () => {
+    const samplePastaMealState = getPastaSampleMealsState();
 
-    describe('when apple and pasta meal entries exist', () => {
-      it('should return 38', () => {
-        const givenMealEntries: CalculatedMealEntry[] = [
-          getPastaCalculatedMealEntry(),
-          getAppleCalculatedMealEntry(),
-        ];
-        const totalNumberOfCarbohydrates =
-          CurrentMealSelectors.selectTotalCarbohydratesOfCurrenMeal.projector(
-            givenMealEntries,
-          );
-        expect(totalNumberOfCarbohydrates).toEqual(38);
-      });
+    const mealEntries = selectMealEntries.projector(
+      samplePastaMealState.currentMeal,
+    );
+
+    expect(mealEntries).toBe(samplePastaMealState.currentMeal.mealEntries);
+  });
+  describe('selectAllMeals', () => {
+    it('should return an array with the pasta meal entry', () => {
+      const samplePastaMealState = getPastaSampleMealsState();
+
+      const allMeals = selectAllMeals.projector(
+        samplePastaMealState.currentMeal.mealEntries,
+      );
+
+      expect(allMeals).toEqual([getPastaMealEntry()]);
     });
+  });
+  describe('selectMealsEntities', () => {
+    it('should return the entities property', () => {
+      const samplePastaMealState = getPastaSampleMealsState();
+
+      const entities = selectMealsEntities.projector(
+        samplePastaMealState.currentMeal.mealEntries,
+      );
+
+      expect(entities).toBe(
+        samplePastaMealState.currentMeal.mealEntries.entities,
+      );
+    });
+  });
+  describe('selectSelectedMealEntryId', () => {
+    it('should return "PASTA"', () => {
+      const currentMeal: Pick<CurrentMeal, 'selectedMealEntryId'> = {
+        selectedMealEntryId: getPastaMealEntry().id,
+      };
+
+      const id = selectSelectedMealEntryId.projector(currentMeal);
+
+      expect(id).toEqual(getPastaMealEntry().id);
+    });
+  });
+  describe('selectAllCalculatedMeals', () => {
+    const calculatedMeals = selectAllCalculatedMeals.projector([
+      getPastaMealEntry(),
+    ]);
+    expect(calculatedMeals).toEqual([getPastaCalculatedMealEntry()]);
   });
   describe('selectSelectedMealEntry', () => {
     let givenMealEntries: Dictionary<MealEntry>;
@@ -53,11 +88,10 @@ describe('Meals Selectors', () => {
           };
         });
         it('should return this entity', () => {
-          const resultEntity =
-            CurrentMealSelectors.selectSelectedMealEntry.projector(
-              givenMealEntries,
-              givenIdOfSelectedMealEntry,
-            );
+          const resultEntity = selectSelectedMealEntry.projector(
+            givenMealEntries,
+            givenIdOfSelectedMealEntry,
+          );
 
           expect(resultEntity).toEqual(getPastaMealEntry());
         });
@@ -67,11 +101,10 @@ describe('Meals Selectors', () => {
           givenMealEntries = {};
         });
         it('should return the empty meal entry', () => {
-          const resultEntity =
-            CurrentMealSelectors.selectSelectedMealEntry.projector(
-              givenMealEntries,
-              givenIdOfSelectedMealEntry,
-            );
+          const resultEntity = selectSelectedMealEntry.projector(
+            givenMealEntries,
+            givenIdOfSelectedMealEntry,
+          );
 
           expect(resultEntity).toEqual(getEmptyMealEntry());
         });
@@ -82,27 +115,34 @@ describe('Meals Selectors', () => {
         givenIdOfSelectedMealEntry = null;
       });
       it('should return the empty meal entry', () => {
-        const resultEntity =
-          CurrentMealSelectors.selectSelectedMealEntry.projector(
-            null,
-            givenIdOfSelectedMealEntry,
-          );
+        const resultEntity = selectSelectedMealEntry.projector(
+          null,
+          givenIdOfSelectedMealEntry,
+        );
         expect(resultEntity).toEqual(getEmptyMealEntry());
       });
     });
   });
-  describe('selectIdOfSelectedMealEntry', () => {
-    it('should return the value of the selectedMealEntry proeprty', () => {
-      const givenCurrentMeal: Pick<CurrentMeal, 'selectedMealEntryId'> = {
-        selectedMealEntryId: 'ID',
-      };
+  describe('selectTotalCarbohydratesOfCurrenMeal', () => {
+    describe('when no meal entries exist', () => {
+      it('should return 0', () => {
+        const givenMealEntries: CalculatedMealEntry[] = [];
+        const totalNumberOfCarbohydrates =
+          selectTotalCarbohydratesOfCurrenMeal.projector(givenMealEntries);
+        expect(totalNumberOfCarbohydrates).toEqual(0);
+      });
+    });
 
-      const resultId =
-        CurrentMealSelectors.selectSelectedMealEntryId.projector(
-          givenCurrentMeal,
-        );
-
-      expect(resultId).toEqual('ID');
+    describe('when apple and pasta meal entries exist', () => {
+      it('should return 38', () => {
+        const givenMealEntries: CalculatedMealEntry[] = [
+          getPastaCalculatedMealEntry(),
+          getAppleCalculatedMealEntry(),
+        ];
+        const totalNumberOfCarbohydrates =
+          selectTotalCarbohydratesOfCurrenMeal.projector(givenMealEntries);
+        expect(totalNumberOfCarbohydrates).toEqual(38);
+      });
     });
   });
 });

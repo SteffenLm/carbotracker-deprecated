@@ -13,16 +13,6 @@ export const selectAllMeals = createSelector(selectMealEntries, (mealEntries) =>
   selectMeals(mealEntries),
 );
 
-export const selectAllCalculatedMeals = createSelector(
-  selectAllMeals,
-  (mealEntries): CalculatedMealEntry[] =>
-    mealEntries.map((mealEntry) => ({
-      ...mealEntry,
-      amountOfCarbohydratesInGramm:
-        (mealEntry.amountInGramm * mealEntry.carbohydratesPer100Gram) / 100,
-    })),
-);
-
 export const selectMealsEntities = createSelector(
   selectMealEntries,
   (mealEntries) => selectMealEntities(mealEntries),
@@ -31,6 +21,16 @@ export const selectMealsEntities = createSelector(
 export const selectSelectedMealEntryId = createSelector(
   selectCurrentMeal,
   (currentMeal) => currentMeal.selectedMealEntryId,
+);
+
+export const selectAllCalculatedMeals = createSelector(
+  selectAllMeals,
+  (mealEntries): CalculatedMealEntry[] =>
+    mealEntries.map((mealEntry) => ({
+      ...mealEntry,
+      amountOfCarbohydratesInGramm:
+        (mealEntry.amountInGramm * mealEntry.carbohydratesPer100Gram) / 100,
+    })),
 );
 
 export const selectSelectedMealEntry = createSelector(
