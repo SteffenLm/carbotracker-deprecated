@@ -3,12 +3,14 @@ import { getPastaMealEntry, MealEntry } from '../../../model/meal-entry.models';
 
 export const MEALS_FEATURE_KEY = 'meals';
 
+export interface CurrentMeal {
+  mealEntries: EntityState<MealEntry>;
+  selectedMealEntry: string | null;
+  error: string | null;
+}
+
 export interface MealsState {
-  currentMeal: {
-    mealEntries: EntityState<MealEntry>;
-    selectedMealEntry: string | null;
-    error: string | null;
-  };
+  currentMeal: CurrentMeal;
   loaded: boolean;
   error: string | null;
 }
