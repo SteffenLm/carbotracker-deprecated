@@ -9,7 +9,9 @@
       "architect": {
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
-          "outputs": ["{options.outputPath}"],
+          "outputs": [
+            "{options.outputPath}"
+          ],
           "options": {
             "outputPath": "dist/apps/carbotracker",
             "index": "apps/carbotracker/src/index.html",
@@ -21,7 +23,9 @@
               "apps/carbotracker/src/favicon.ico",
               "apps/carbotracker/src/assets"
             ],
-            "styles": ["apps/carbotracker/src/styles.scss"],
+            "styles": [
+              "apps/carbotracker/src/styles.scss"
+            ],
             "scripts": []
           },
           "configurations": {
@@ -86,7 +90,9 @@
         },
         "test": {
           "builder": "@nrwl/jest:jest",
-          "outputs": ["coverage/apps/carbotracker"],
+          "outputs": [
+            "coverage/apps/carbotracker"
+          ],
           "options": {
             "jestConfig": "apps/carbotracker/jest.config.js",
             "passWithNoTests": true
@@ -115,14 +121,20 @@
         },
         "lint": {
           "builder": "@nrwl/linter:eslint",
-          "outputs": ["{options.outputFile}"],
+          "outputs": [
+            "{options.outputFile}"
+          ],
           "options": {
-            "lintFilePatterns": ["apps/carbotracker-e2e/**/*.{js,ts}"]
+            "lintFilePatterns": [
+              "apps/carbotracker-e2e/**/*.{js,ts}"
+            ]
           }
         }
       },
       "tags": [],
-      "implicitDependencies": ["carbotracker"]
+      "implicitDependencies": [
+        "carbotracker"
+      ]
     },
     "localstorage": {
       "projectType": "library",
@@ -132,7 +144,9 @@
       "architect": {
         "test": {
           "builder": "@nrwl/jest:jest",
-          "outputs": ["coverage/libs/localstorage"],
+          "outputs": [
+            "coverage/libs/localstorage"
+          ],
           "options": {
             "jestConfig": "libs/localstorage/jest.config.js",
             "passWithNoTests": true
@@ -158,7 +172,9 @@
       "architect": {
         "test": {
           "builder": "@nrwl/jest:jest",
-          "outputs": ["coverage/libs/meals"],
+          "outputs": [
+            "coverage/libs/meals"
+          ],
           "options": {
             "jestConfig": "libs/meals/jest.config.js",
             "passWithNoTests": true
@@ -184,7 +200,9 @@
       "architect": {
         "test": {
           "builder": "@nrwl/jest:jest",
-          "outputs": ["coverage/libs/products"],
+          "outputs": [
+            "coverage/libs/products"
+          ],
           "options": {
             "jestConfig": "libs/products/jest.config.js",
             "passWithNoTests": true
@@ -210,7 +228,9 @@
       "architect": {
         "test": {
           "builder": "@nrwl/jest:jest",
-          "outputs": ["coverage/libs/ui"],
+          "outputs": [
+            "coverage/libs/ui"
+          ],
           "options": {
             "jestConfig": "libs/ui/jest.config.js",
             "passWithNoTests": true
@@ -219,7 +239,10 @@
         "lint": {
           "builder": "@nrwl/linter:eslint",
           "options": {
-            "lintFilePatterns": ["libs/ui/src/**/*.ts", "libs/ui/src/**/*.html"]
+            "lintFilePatterns": [
+              "libs/ui/src/**/*.ts",
+              "libs/ui/src/**/*.html"
+            ]
           }
         }
       },
