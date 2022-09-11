@@ -2,10 +2,9 @@ import { TestBed } from '@angular/core/testing';
 import { provideMockActions } from '@ngrx/effects/testing';
 import { Action } from '@ngrx/store';
 import { provideMockStore } from '@ngrx/store/testing';
-import { Observable } from 'rxjs';
+import { Observable, of } from 'rxjs';
 import { MealsLocalStorageService } from '../../../services/meals-local-storage.service';
 import { LocalStorageApiActions, SystemApiActions } from '../actions/api';
-import { marbles } from 'rxjs-marbles/jest';
 
 import { MealsLocalStorageEffects } from './meals-local-storage.effects';
 import { MealsState } from '../model/meals-state.model';
@@ -72,69 +71,63 @@ describe('MealsLocalStorageEffects', () => {
     describe('if the system get initialized', () => {
       it(
         'should dispatch a load from local storage success event',
-        marbles((m) => {
+        (done) => {
           loadMock.mockReturnValue('SUCCESS');
-          actions$ = m.cold('-a', getMarbleValues());
-          const expectedActions$ = m.cold('-b', getMarbleValues());
-          m.expect(effects.loadFromLocalStorage$).toBeObservable(
-            expectedActions$ as unknown as never,
+          actions$ = of(getMarbleValues().a);
+
+          effects.loadFromLocalStorage$.subscribe(
+            (action) => { 
+              expect(action).toEqual(getMarbleValues().b);
+              done();
+            }
           );
-        }),
-      );
+        });
       it(
         'should dispatch a load from local storage error event if local storage api fails',
-        marbles((m) => {
+        (done) => {
           loadMock.mockImplementation(() => {
             throw new Error();
           });
-          actions$ = m.cold('-a', getMarbleValues());
-          const expectedActions$ = m.cold('-c', getMarbleValues());
-          m.expect(effects.loadFromLocalStorage$).toBeObservable(
-            expectedActions$ as unknown as never,
+          actions$ = of(getMarbleValues().a);
+
+          effects.loadFromLocalStorage$.subscribe(
+            (action) => { 
+              expect(action).toEqual(getMarbleValues().c);
+              done();
+            }
           );
-        }),
-      );
+        });
     });
   });
   describe('saveToLocalStorage$', () => {
     describe('if a create meal entry gets dispatched', () => {
-      beforeEach((done) => {
-        marbles((m) => {
-          actions$ = m.cold('-f', getMarbleValues());
-          done();
-        })();
+      beforeEach(() => {
+          actions$ = of(getMarbleValues().f);
       });
       it(
         'should dispatch a save to local storage success event',
-        marbles((m) => {
-          const expectedActions$ = m.cold('-d', getMarbleValues());
-          m.expect(effects.saveToLocalStorage$).toBeObservable(
-            expectedActions$ as unknown as never,
-          );
-        }),
-      );
-      it('should call the save method of the local storage service', (done) => {
-        marbles((m) => {
-          m.flush();
-          effects.saveToLocalStorage$.pipe(take(1)).subscribe(() => {
-            expect(saveMock).toHaveBeenCalledWith('MOCKED_STATE_VALUE');
-            done();
-          });
-        })();
-      });
+        (done) => {
+            effects.saveToLocalStorage$.subscribe(
+              (action) => {
+                expect(action).toEqual(getMarbleValues().d)
+                done();
+              }
+            );
+        });
       it(
         'should dispatch a save to local storage error event if local storage api fails',
-        marbles((m) => {
+        (done) => {
           saveMock.mockImplementation(() => {
             throw new Error();
           });
-          actions$ = m.cold('-f', getMarbleValues());
-          const expectedActions$ = m.cold('-g', getMarbleValues());
-          m.expect(effects.saveToLocalStorage$).toBeObservable(
-            expectedActions$ as unknown as never,
+
+          effects.saveToLocalStorage$.subscribe(
+            (action) => {
+              expect(action).toEqual(getMarbleValues().g)
+              done();
+            }
           );
-        }),
-      );
+        });
     });
   });
 });
