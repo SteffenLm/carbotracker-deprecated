@@ -69,65 +69,49 @@ describe('MealsLocalStorageEffects', () => {
 
   describe('loadFromLocalStorage$', () => {
     describe('if the system get initialized', () => {
-      it(
-        'should dispatch a load from local storage success event',
-        (done) => {
-          loadMock.mockReturnValue('SUCCESS');
-          actions$ = of(getMarbleValues().a);
+      it('should dispatch a load from local storage success event', (done) => {
+        loadMock.mockReturnValue('SUCCESS');
+        actions$ = of(getMarbleValues().a);
 
-          effects.loadFromLocalStorage$.subscribe(
-            (action) => { 
-              expect(action).toEqual(getMarbleValues().b);
-              done();
-            }
-          );
+        effects.loadFromLocalStorage$.subscribe((action) => {
+          expect(action).toEqual(getMarbleValues().b);
+          done();
         });
-      it(
-        'should dispatch a load from local storage error event if local storage api fails',
-        (done) => {
-          loadMock.mockImplementation(() => {
-            throw new Error();
-          });
-          actions$ = of(getMarbleValues().a);
+      });
+      it('should dispatch a load from local storage error event if local storage api fails', (done) => {
+        loadMock.mockImplementation(() => {
+          throw new Error();
+        });
+        actions$ = of(getMarbleValues().a);
 
-          effects.loadFromLocalStorage$.subscribe(
-            (action) => { 
-              expect(action).toEqual(getMarbleValues().c);
-              done();
-            }
-          );
+        effects.loadFromLocalStorage$.subscribe((action) => {
+          expect(action).toEqual(getMarbleValues().c);
+          done();
         });
+      });
     });
   });
   describe('saveToLocalStorage$', () => {
     describe('if a create meal entry gets dispatched', () => {
       beforeEach(() => {
-          actions$ = of(getMarbleValues().f);
+        actions$ = of(getMarbleValues().f);
       });
-      it(
-        'should dispatch a save to local storage success event',
-        (done) => {
-            effects.saveToLocalStorage$.subscribe(
-              (action) => {
-                expect(action).toEqual(getMarbleValues().d)
-                done();
-              }
-            );
+      it('should dispatch a save to local storage success event', (done) => {
+        effects.saveToLocalStorage$.subscribe((action) => {
+          expect(action).toEqual(getMarbleValues().d);
+          done();
         });
-      it(
-        'should dispatch a save to local storage error event if local storage api fails',
-        (done) => {
-          saveMock.mockImplementation(() => {
-            throw new Error();
-          });
+      });
+      it('should dispatch a save to local storage error event if local storage api fails', (done) => {
+        saveMock.mockImplementation(() => {
+          throw new Error();
+        });
 
-          effects.saveToLocalStorage$.subscribe(
-            (action) => {
-              expect(action).toEqual(getMarbleValues().g)
-              done();
-            }
-          );
+        effects.saveToLocalStorage$.subscribe((action) => {
+          expect(action).toEqual(getMarbleValues().g);
+          done();
         });
+      });
     });
   });
 });
