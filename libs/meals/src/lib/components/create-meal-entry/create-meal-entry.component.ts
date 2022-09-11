@@ -1,5 +1,9 @@
 import { Component } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import {
+  UntypedFormBuilder,
+  UntypedFormGroup,
+  Validators,
+} from '@angular/forms';
 import { Store } from '@ngrx/store';
 import { combineLatest, Observable } from 'rxjs';
 import { filter, map, startWith } from 'rxjs/operators';
@@ -14,11 +18,11 @@ import { MealEntry } from '../../model/meal-entry.models';
   styleUrls: ['./create-meal-entry.component.scss'],
 })
 export class CreateMealEntryComponent {
-  public readonly mealEntryFormGroup: FormGroup;
+  public readonly mealEntryFormGroup: UntypedFormGroup;
   public readonly filteredProducts: Observable<ProductsEntity[]>;
 
   constructor(
-    private readonly formBuilder: FormBuilder,
+    private readonly formBuilder: UntypedFormBuilder,
     private readonly store: Store,
   ) {
     this.mealEntryFormGroup = this.createMealEntryFormGroup();
@@ -60,7 +64,7 @@ export class CreateMealEntryComponent {
     return product.name;
   }
 
-  private createMealEntryFormGroup(): FormGroup {
+  private createMealEntryFormGroup(): UntypedFormGroup {
     return this.formBuilder.group({
       product: ['', [Validators.required]],
       amount: ['', [Validators.required, Validators.min(1)]],

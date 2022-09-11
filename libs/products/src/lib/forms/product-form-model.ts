@@ -1,8 +1,8 @@
 import {
-  FormBuilder,
-  FormControl,
+  UntypedFormBuilder,
+  UntypedFormControl,
   FormControlStatus,
-  FormGroup,
+  UntypedFormGroup,
   Validators,
 } from '@angular/forms';
 import { Observable } from 'rxjs';
@@ -10,11 +10,12 @@ import { map } from 'rxjs/operators';
 import { ProductFormValue } from '../model/product-form-value.model';
 
 export class ProductFormModel {
-  private readonly productFormGroup: FormGroup = this.createProductFormGroup();
+  private readonly productFormGroup: UntypedFormGroup =
+    this.createProductFormGroup();
 
-  constructor(private readonly formBuilder: FormBuilder) {}
+  constructor(private readonly formBuilder: UntypedFormBuilder) {}
 
-  public getFormGroup(): FormGroup {
+  public getFormGroup(): UntypedFormGroup {
     return this.productFormGroup;
   }
 
@@ -44,15 +45,17 @@ export class ProductFormModel {
     };
   }
 
-  private getCarbohydratesControl(): FormControl {
-    return this.productFormGroup.get('carbohydratesPer100Gram') as FormControl;
+  private getCarbohydratesControl(): UntypedFormControl {
+    return this.productFormGroup.get(
+      'carbohydratesPer100Gram',
+    ) as UntypedFormControl;
   }
 
-  private getNameControl(): FormControl {
-    return this.productFormGroup.get('name') as FormControl;
+  private getNameControl(): UntypedFormControl {
+    return this.productFormGroup.get('name') as UntypedFormControl;
   }
 
-  private createProductFormGroup(): FormGroup {
+  private createProductFormGroup(): UntypedFormGroup {
     return this.formBuilder.group({
       name: ['', [Validators.required]],
       carbohydratesPer100Gram: [

@@ -1,5 +1,9 @@
 import { Component } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import {
+  UntypedFormBuilder,
+  UntypedFormGroup,
+  Validators,
+} from '@angular/forms';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
 import { tap } from 'rxjs/operators';
@@ -23,11 +27,11 @@ export class EditMealEntryComponent {
         }),
       ),
     );
-  public readonly mealEntryFormGroup: FormGroup;
+  public readonly mealEntryFormGroup: UntypedFormGroup;
 
   constructor(
     private readonly store: Store,
-    private readonly formBuilder: FormBuilder,
+    private readonly formBuilder: UntypedFormBuilder,
   ) {
     this.mealEntryFormGroup = this.createMealEntryFormGroup();
   }
@@ -53,7 +57,7 @@ export class EditMealEntryComponent {
     );
   }
 
-  private createMealEntryFormGroup(): FormGroup {
+  private createMealEntryFormGroup(): UntypedFormGroup {
     return this.formBuilder.group({
       product: [
         {

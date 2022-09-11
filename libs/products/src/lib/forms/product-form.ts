@@ -1,4 +1,4 @@
-import { FormGroup } from '@angular/forms';
+import { UntypedFormGroup } from '@angular/forms';
 import { Observable } from 'rxjs';
 import { map, startWith } from 'rxjs/operators';
 
@@ -8,7 +8,7 @@ import { ProductFormModel } from './product-form-model';
 export class ProductForm {
   constructor(private readonly productFormModel: ProductFormModel) {}
 
-  public getAsFormGroup(): FormGroup {
+  public getAsFormGroup(): UntypedFormGroup {
     return this.productFormModel.getFormGroup();
   }
 

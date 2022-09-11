@@ -28,7 +28,6 @@
     ]
   },
   "cli": {
-    "defaultCollection": "@nrwl/angular",
     "packageManager": "npm"
   },
   "defaultProject": "carbotracker",
@@ -57,5 +56,6 @@
     "@nrwl/angular:component": {
       "style": "scss"
     }
-  }
+  },
+  "$schema": "./node_modules/nx/schemas/nx-schema.json"
 }

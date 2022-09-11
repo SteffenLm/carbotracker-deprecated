@@ -2,6 +2,7 @@
   "version": 1,
   "projects": {
     "carbotracker": {
+      "$schema": "../../node_modules/nx/schemas/project-schema.json",
       "projectType": "application",
       "root": "apps/carbotracker",
       "sourceRoot": "apps/carbotracker/src",
@@ -96,6 +97,7 @@
       "tags": []
     },
     "carbotracker-e2e": {
+      "$schema": "../../node_modules/nx/schemas/project-schema.json",
       "root": "apps/carbotracker-e2e",
       "sourceRoot": "apps/carbotracker-e2e/src",
       "projectType": "application",
@@ -125,6 +127,7 @@
       "implicitDependencies": ["carbotracker"]
     },
     "localstorage": {
+      "$schema": "../../node_modules/nx/schemas/project-schema.json",
       "projectType": "library",
       "root": "libs/localstorage",
       "sourceRoot": "libs/localstorage/src",
@@ -151,6 +154,7 @@
       "tags": []
     },
     "meals": {
+      "$schema": "../../node_modules/nx/schemas/project-schema.json",
       "projectType": "library",
       "root": "libs/meals",
       "sourceRoot": "libs/meals/src",
@@ -177,6 +181,7 @@
       "tags": []
     },
     "products": {
+      "$schema": "../../node_modules/nx/schemas/project-schema.json",
       "projectType": "library",
       "root": "libs/products",
       "sourceRoot": "libs/products/src",
@@ -203,6 +208,7 @@
       "tags": []
     },
     "ui": {
+      "$schema": "../../node_modules/nx/schemas/project-schema.json",
       "projectType": "library",
       "root": "libs/ui",
       "sourceRoot": "libs/ui/src",
