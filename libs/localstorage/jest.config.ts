@@ -1,5 +1,6 @@
-module.exports = {
-  displayName: 'carbotracker',
+/* eslint-disable */
+export default {
+  displayName: 'localstorage',
   preset: '../../jest.preset.js',
   setupFilesAfterEnv: ['<rootDir>/src/test-setup.ts'],
   globals: {
@@ -8,11 +9,10 @@ module.exports = {
       stringifyContentPathRegex: '\\.(html|svg)$',
     },
   },
-  coverageDirectory: '../../coverage/apps/carbotracker',
+  coverageDirectory: '../../coverage/libs/localstorage',
   transform: {
     '^.+.(ts|mjs|js|html)$': 'jest-preset-angular',
   },
-  transformIgnorePatterns: ['node_modules/(?!.*.mjs$)'],
   transformIgnorePatterns: ['node_modules/(?!.*.mjs$)'],
   snapshotSerializers: [
     'jest-preset-angular/build/serializers/no-ng-attributes',
