@@ -9,7 +9,7 @@ export class ToolbarComponent {
   @Input() enableBackNavigation = false;
   @Input() title = '';
 
-  @Output() clickBackNavigation = new EventEmitter();
+  @Output() clickBackNavigation = new EventEmitter<void>();
 
   public onClickBackNavigation() {
     this.clickBackNavigation.next();
