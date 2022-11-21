@@ -7,7 +7,7 @@ jobs:
     runs-on: ubuntu-latest
     defaults:
       run:
-        working-directory: repo/diadev
+        working-directory: repo
     steps:
       - name: checkout repository
         uses: actions/checkout@v2
@@ -20,10 +20,10 @@ jobs:
         with:
           node-version: "14.x"
           cache: "npm"
-          cache-dependency-path: repo/diadev/package-lock.json
+          cache-dependency-path: repo/package-lock.json
 
       - name: install dependencies
-        run: npm i
+        run: npm ci
 
       - name: build carbotracker app
         run: npm run build -- --base-href="/carbotracker/" --output-path ../../app

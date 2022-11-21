@@ -1,36 +1,33 @@
 name: CI
 on:
-  pull_request:  
+  pull_request:
   workflow_dispatch:
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
-jobs:  
+jobs:
   test:
     # The type of runner that the job will run on
     runs-on: ubuntu-latest
-    defaults:
-      run:
-        working-directory: diadev
     steps:
       - name: checkout repository
         uses: actions/checkout@v2
         with:
           fetch-depth: 0
-      
+
       - name: setup node
         uses: actions/setup-node@v2
         with:
           node-version: '14.x'
           cache: 'npm'
           cache-dependency-path: package-lock.json
-          
+
       - name: install dependencies
         run: npm ci
-        
+
       - name: lint
         run: npm run ci:lint
 
       - name: test
         run: npm run ci:test
-        
+
       #- name: e2e
       #  run: npm run ci:e2e
