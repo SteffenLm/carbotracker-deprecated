@@ -21,10 +21,10 @@ jobs:
         with:
           node-version: '14.x'
           cache: 'npm'
-          cache-dependency-path: diadev/package-lock.json
+          cache-dependency-path: package-lock.json
           
       - name: install dependencies
-        run: npm i
+        run: npm ci
         
       - name: lint
         run: npm run ci:lint
