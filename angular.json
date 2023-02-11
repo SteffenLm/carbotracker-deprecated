@@ -87,7 +87,7 @@
         },
         "test": {
           "builder": "@nrwl/jest:jest",
-          "outputs": ["coverage/apps/carbotracker"],
+          "outputs": ["{workspaceRoot}/coverage/apps/carbotracker"],
           "options": {
             "jestConfig": "apps/carbotracker/jest.config.ts",
             "passWithNoTests": true
@@ -135,7 +135,7 @@
       "architect": {
         "test": {
           "builder": "@nrwl/jest:jest",
-          "outputs": ["coverage/libs/localstorage"],
+          "outputs": ["{workspaceRoot}/coverage/libs/localstorage"],
           "options": {
             "jestConfig": "libs/localstorage/jest.config.ts",
             "passWithNoTests": true
@@ -162,7 +162,7 @@
       "architect": {
         "test": {
           "builder": "@nrwl/jest:jest",
-          "outputs": ["coverage/libs/meals"],
+          "outputs": ["{workspaceRoot}/coverage/libs/meals"],
           "options": {
             "jestConfig": "libs/meals/jest.config.ts",
             "passWithNoTests": true
@@ -189,7 +189,7 @@
       "architect": {
         "test": {
           "builder": "@nrwl/jest:jest",
-          "outputs": ["coverage/libs/products"],
+          "outputs": ["{workspaceRoot}/coverage/libs/products"],
           "options": {
             "jestConfig": "libs/products/jest.config.ts",
             "passWithNoTests": true
@@ -216,7 +216,7 @@
       "architect": {
         "test": {
           "builder": "@nrwl/jest:jest",
-          "outputs": ["coverage/libs/ui"],
+          "outputs": ["{workspaceRoot}/coverage/libs/ui"],
           "options": {
             "jestConfig": "libs/ui/jest.config.ts",
             "passWithNoTests": true
