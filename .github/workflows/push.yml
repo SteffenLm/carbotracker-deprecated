@@ -26,7 +26,7 @@ jobs:
         run: npm ci
 
       - name: build carbotracker app
-        run: npm run build -- --base-href="/carbotracker/" --output-path ../../app
+        run: npm run build -- --baseHref="/carbotracker/" --outputPath ../../app
 
       - name: revert changes and checkout app-carbotracker branch
         run: |
