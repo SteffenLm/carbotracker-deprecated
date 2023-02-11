@@ -12,6 +12,7 @@
     "lint:all": "nx run-many --target=lint --all=true",
     "ci:lint": "nx affected --target=lint --base=origin/main",
     "ci:test": "nx affected --target=test --base=origin/main",
+    "ci:build": "nx affected --target=build --base=origin/main",
     "ci:e2e": "nx affected --target=e2e --base=origin/main"
   },
   "private": true,
