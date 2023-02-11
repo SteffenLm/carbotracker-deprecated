@@ -16,7 +16,7 @@ jobs:
       - name: setup node
         uses: actions/setup-node@v2
         with:
-          node-version: '14.x'
+          node-version: '16.x'
           cache: 'npm'
           cache-dependency-path: package-lock.json
 
@@ -28,6 +28,9 @@ jobs:
 
       - name: test
         run: npm run ci:test
+
+      - name: build
+        run: npm run ci:build
 
       #- name: e2e
       #  run: npm run ci:e2e
