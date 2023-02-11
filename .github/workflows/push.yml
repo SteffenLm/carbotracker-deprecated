@@ -28,15 +28,6 @@ jobs:
       - name: build carbotracker app
         run: npm run build -- --baseHref="/carbotracker/" --outputPath ../../app
 
-      - name: test
-        run: ls -la
-
-      - name: test
-        run: ls -la ../
-
-      - name: test
-        run: ls -la ../../
-
       - name: revert changes and checkout app-carbotracker branch
         run: |
           git stash -a
@@ -44,7 +35,7 @@ jobs:
         working-directory: repo
 
       - name: copy app files
-        run: cp $GITHUB_WORKSPACE/app/. $GITHUB_WORKSPACE/repo -a
+        run: cp $GITHUB_WORKSPACE/../app/. $GITHUB_WORKSPACE/repo -a
         working-directory: /
         
       - name: add and commit
