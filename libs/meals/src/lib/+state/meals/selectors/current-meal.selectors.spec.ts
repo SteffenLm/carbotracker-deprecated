@@ -63,7 +63,7 @@ describe('CurrentMealSelectors', () => {
         selectedMealEntryId: getPastaMealEntry().id,
       };
 
-      const id = selectSelectedMealEntryId.projector(currentMeal);
+      const id = selectSelectedMealEntryId.projector(currentMeal as CurrentMeal);
 
       expect(id).toEqual(getPastaMealEntry().id);
     });
@@ -116,7 +116,7 @@ describe('CurrentMealSelectors', () => {
       });
       it('should return the empty meal entry', () => {
         const resultEntity = selectSelectedMealEntry.projector(
-          null,
+          null as unknown as Dictionary<MealEntry>,
           givenIdOfSelectedMealEntry,
         );
         expect(resultEntity).toEqual(getEmptyMealEntry());
